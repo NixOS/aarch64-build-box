@@ -20,19 +20,16 @@ let
 
     dezgeg = {
       trusted = true;
-
       keys = ./keys/dezgeg;
     };
 
     grahamc = {
       trusted = true;
-
       keys = ./keys/grahamc;
     };
 
     vcunat = {
       trusted = true;
-
       keys = ./keys/vcunat;
     };
   };
