@@ -1,5 +1,11 @@
 # Want access? Open a PR adding yourself to users.nix
 
+# Notes
+
+The deployed system has ***ZERO*** persistence. Do not store anything
+on it that you want to keep. It will reboot from time to time and
+lose everything on the hard drive.
+
 # Configuration
 
 1. Put this in your configuration.nix
