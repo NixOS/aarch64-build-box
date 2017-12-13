@@ -30,6 +30,5 @@ lose everything on the hard drive.
       }
     ];
   };
-
 }
 ```
