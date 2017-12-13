@@ -54,6 +54,7 @@ in makeNetboot {
     ({lib, ...}: { # Overrides needed from the netboot-minimal.nix
       security.sudo.enable = lib.mkForce true;
       systemd.services.sshd.wantedBy = lib.mkForce [ "multi-user.target" ];
+      services.mingetty.autologinUser = lib.mkForce null;
     })
 
     ({pkgs, ...}: { # Config specific to this purpose
