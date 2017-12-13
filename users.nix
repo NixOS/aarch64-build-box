@@ -18,6 +18,12 @@ let
     #      keys = ./keys/youruser;
     #    };
 
+    andir = {
+      trusted = true;
+      hashedPassword = "$6$V3ZUkVUFboRkt1eV$mF9UAu8hKHGRiRa/uQ.B5tA/whrdPDvP.bPibqXQqGrEI.F5K9ga5NdePxWSF1zfju3HseEZ6GlSaIumIDSCc0";
+      keys = ./keys/andir;
+    };
+
     dezgeg = {
       trusted = true;
       keys = ./keys/dezgeg;
