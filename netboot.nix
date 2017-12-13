@@ -71,7 +71,7 @@ in makeNetboot {
           options = "--max-freed $((64 * 1024**3))";
         };
 
-        trustedUsers = [ "@wheel" ];
+        trustedUsers = [ "@wheel" "@trusted" ];
 
         package = pkgs.nixUnstable;
 

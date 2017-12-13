@@ -24,6 +24,7 @@ let
     };
 
     grahamc = {
+      sudo = true;
       trusted = true;
       keys = ./keys/grahamc;
     };
@@ -34,19 +35,33 @@ let
     };
   };
 
+  ifAttr = key: default: result: opts:
+    if (opts ? "${key}") && opts."${key}"
+      then result
+      else default;
+
+  maybeTrusted = ifAttr "trusted" [] [ "trusted" ];
+  maybeWheel = ifAttr "sudo" [] [ "wheel" ];
+
+  userGroups = opts:
+    (maybeTrusted opts) ++
+    (maybeWheel opts);
+
   descToUser = name: opts:
     {
       isNormalUser = true;
-      extraGroups = lib.optional opts.trusted "wheel";
+      extraGroups = userGroups opts;
       createHome = true;
       home = "/home/${name}";
-      inherit (opts) hashedPassword;
+      hashedPassword = opts.password or null;
       openssh.authorizedKeys.keyFiles = [
         opts.keys
       ];
     };
 in {
   users = {
+    groups.trusted = {};
+
     mutableUsers = false;
     users = lib.mapAttrs descToUser users;
   };
