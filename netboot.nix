@@ -21,6 +21,18 @@ let
           echo "file ipxe $out/netboot.ipxe" >> $out/nix-support/hydra-build-products
         '';
       };
+
+      persistence = pkgs.writeScript "persistence"
+        ''
+          #!/bin/sh
+
+          set -eu
+          set -o pipefail
+
+          PATH="${pkgs.coreutils}/bin:${pkgs.eject}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.e2fsprogs}/bin"
+
+          exec ${./persistence.sh}
+        '';
 in makeNetboot {
   system = "aarch64-linux";
   modules = [
@@ -45,6 +57,13 @@ in makeNetboot {
     })
 
     ({pkgs, ...}: { # Config specific to this purpose
+      boot.initrd.postMountCommands = "${persistence}";
+      boot.postBootCommands = ''
+        ls -la /
+        rm /etc/ssh/ssh_host_*
+        cp -r /persist/ssh/ssh_host_* /etc/ssh/
+      '';
+
       nix = {
         gc = {
           automatic = true;
