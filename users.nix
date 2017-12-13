@@ -24,6 +24,12 @@ let
       keys = ./keys/dezgeg;
     };
 
+    flokli = {
+      trusted = true;
+
+      keys = ./keys/flokli;
+    };
+
     grahamc = {
       trusted = true;
 
