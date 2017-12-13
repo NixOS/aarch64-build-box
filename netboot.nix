@@ -1,4 +1,4 @@
-{ pkgs ? import ./nix {}
+{ pkgs ? import ./nix { system = "aarch64-linux"; }
 }:
 let
   makeNetboot = config:
