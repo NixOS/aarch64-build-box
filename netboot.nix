@@ -69,6 +69,8 @@ in makeNetboot {
       '';
 
       nix = {
+        buildCores = 0;
+
         gc = {
           automatic = true;
           options = "--max-freed $((64 * 1024**3))";
@@ -92,41 +94,47 @@ in makeNetboot {
       };
       users.groups.gc-of-borg.gid = 402;
 
-      systemd.services.grahamcofborg-builder = {
-        enable = true;
-        after = [ "network.target" "network-online.target" ];
-        wants = [ "network-online.target" ];
-        wantedBy = [ "multi-user.target" ];
+      systemd.services = let
+        builder = id: {
+          enable = true;
+          after = [ "network.target" "network-online.target" ];
+          wants = [ "network-online.target" ];
+          wantedBy = [ "multi-user.target" ];
 
-        path = with pkgs; [
-          nixUnstable
-          git
-          curl
-          bash
-        ];
+          path = with pkgs; [
+            nixUnstable
+            git
+            curl
+            bash
+          ];
 
-        serviceConfig = {
-          User = "gc-of-borg";
-          Group = "gc-of-borg";
-          PrivateTmp = true;
-          WorkingDirectory = "/var/lib/gc-of-borg";
-          Restart = "always";
+          serviceConfig = {
+            User = "gc-of-borg";
+            Group = "gc-of-borg";
+            PrivateTmp = true;
+            WorkingDirectory = "/var/lib/gc-of-borg";
+            Restart = "always";
+          };
+
+          preStart = ''
+            mkdir -p ./nix-test-rs-${id}
+          '';
+
+          script = ''
+            export HOME=/var/lib/gc-of-borg;
+            export NIX_REMOTE=daemon;
+            export NIX_PATH=nixpkgs=/run/current-system/nixpkgs;
+            git config --global user.email "graham+cofborg@grahamc.com"
+            git config --global user.name "GrahamCOfBorg"
+            export RUST_BACKTRACE=1
+
+            ${ofborg}/bin/builder /persist/ofborg/config-${id}.json
+          '';
         };
-
-        preStart = ''
-          mkdir -p ./nix-test
-        '';
-
-        script = ''
-          export HOME=/var/lib/gc-of-borg;
-          export NIX_REMOTE=daemon;
-          export NIX_PATH=nixpkgs=/run/current-system/nixpkgs;
-          git config --global user.email "graham+cofborg@grahamc.com"
-          git config --global user.name "GrahamCOfBorg"
-          export RUST_BACKTRACE=1
-
-          ${ofborg}/bin/builder /persist/ofborg/config.json
-        '';
+      in {
+        grahamcofborg-builder-1 = builder "1";
+        grahamcofborg-builder-2 = builder "2";
+        grahamcofborg-builder-3 = builder "3";
       };
     })
 
