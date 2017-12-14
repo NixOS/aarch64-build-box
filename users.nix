@@ -23,6 +23,12 @@ let
       keys = ./keys/dezgeg;
     };
 
+    flokli = {
+      trusted = true;
+
+      keys = ./keys/flokli;
+    };
+
     grahamc = {
       sudo = true;
       trusted = true;
