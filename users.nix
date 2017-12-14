@@ -25,7 +25,6 @@ let
 
     flokli = {
       trusted = true;
-
       keys = ./keys/flokli;
     };
 
