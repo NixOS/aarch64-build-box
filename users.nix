@@ -26,6 +26,7 @@ let
     grahamc = {
       sudo = true;
       trusted = true;
+      password = "$6$lAjIm6PyElKewH$WfO/3pGei09YstCXghkCx5bDUvxsou2h63HMMTHgA/5tF8AsU6iw36PZm66z34n4oxW13yTUXaUAuKP/aHepg.";
       keys = ./keys/grahamc;
     };
 
