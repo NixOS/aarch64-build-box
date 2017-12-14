@@ -22,17 +22,20 @@ let
         '';
       };
 
-      persistence = pkgs.writeScript "persistence"
-        ''
-          #!/bin/sh
+  persistence = pkgs.writeScript "persistence"
+    ''
+      #!/bin/sh
 
-          set -eu
-          set -o pipefail
+      set -eu
+      set -o pipefail
 
-          PATH="${pkgs.coreutils}/bin:${pkgs.eject}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.e2fsprogs}/bin"
+      PATH="${pkgs.coreutils}/bin:${pkgs.eject}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.e2fsprogs}/bin"
 
-          exec ${./persistence.sh}
-        '';
+      exec ${./persistence.sh}
+    '';
+
+  ofborg = builtins.storePath ./nix/ofborg-path;
+
 in makeNetboot {
   system = "aarch64-linux";
   modules = [
@@ -76,6 +79,54 @@ in makeNetboot {
         package = pkgs.nixUnstable;
 
         useSandbox = true;
+      };
+    })
+
+    ({pkgs, ...}: {
+      users.users.gc-of-borg = {
+        description = "GC Of Borg Workers";
+        home = "/var/lib/gc-of-borg";
+        createHome = true;
+        group = "gc-of-borg";
+        uid = 402;
+      };
+      users.groups.gc-of-borg.gid = 402;
+
+      systemd.services.grahamcofborg-builder = {
+        enable = true;
+        after = [ "network.target" "network-online.target" ];
+        wants = [ "network-online.target" ];
+        wantedBy = [ "multi-user.target" ];
+
+        path = with pkgs; [
+          nixUnstable
+          git
+          curl
+          bash
+        ];
+
+        serviceConfig = {
+          User = "gc-of-borg";
+          Group = "gc-of-borg";
+          PrivateTmp = true;
+          WorkingDirectory = "/var/lib/gc-of-borg";
+          Restart = "always";
+        };
+
+        preStart = ''
+          mkdir -p ./nix-test
+        '';
+
+        script = ''
+          export HOME=/var/lib/gc-of-borg;
+          export NIX_REMOTE=daemon;
+          export NIX_PATH=nixpkgs=/run/current-system/nixpkgs;
+          git config --global user.email "graham+cofborg@grahamc.com"
+          git config --global user.name "GrahamCOfBorg"
+          export RUST_BACKTRACE=1
+
+          ${ofborg}/bin/builder /persist/ofborg/config.json
+        '';
       };
     })
 
