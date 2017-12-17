@@ -23,6 +23,11 @@ let
       keys = ./keys/dezgeg;
     };
 
+    dhess = {
+      trusted = true;
+      keys = ./keys/dhess;
+    };
+
     flokli = {
       trusted = true;
       keys = ./keys/flokli;
