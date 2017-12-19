@@ -68,6 +68,10 @@ in makeNetboot {
         cp -r /persist/ssh/ssh_host_* /etc/ssh/
       '';
 
+      systemd.services.nix-daemon = {
+        environment.LD_PRELOAD = "${pkgs.libeatmydata}/lib/libeatmydata.so";
+      };
+
       nix = {
         buildCores = 0;
 
