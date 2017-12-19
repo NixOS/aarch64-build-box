@@ -39,7 +39,12 @@ let
 in makeNetboot {
   system = "aarch64-linux";
   modules = [
-    "${pkgs.path}/nixos/modules/installer/netboot/netboot-minimal.nix"
+    "${pkgs.path}/nixos/modules/profiles/all-hardware.nix"
+    "${pkgs.path}/nixos/modules/profiles/base.nix"
+    "${pkgs.path}/nixos/modules/profiles/installation-device.nix"
+    "${pkgs.path}/nixos/modules/profiles/minimal.nix"
+
+    ./modules/netboot.nix
 
     { # Hardware Tuning
       boot = {
