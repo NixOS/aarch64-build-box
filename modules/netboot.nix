@@ -30,54 +30,33 @@ with lib;
           else [ pkgs.grub2 pkgs.syslinux ]);
     system.boot.loader.kernelFile = pkgs.stdenv.platform.kernelTarget;
 
-    boot.initrd.postDeviceCommands = ''
-      PATH="${pkgs.e2fsprogs}/bin:$PATH"
+    fileSystems."/" =
+      { fsType = "tmpfs";
+        options = [ "mode=0755" ];
+      };
 
-      if ! test -b /dev/sda2; then
-        sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/sda
-          o # clear the in memory partition table
-          n # new partition
-          p # primary partition
-          1 # partition number 1
-            # default - start at beginning of disk
-          +500M # 500MB for /persist
-          n # new partition
-          p # primary partition
-          2 # partition #2
-            # default -- start at the end of partition #1
-            # default, end at the end of the disk
-          p # print the in-memory partition table
-          w # write the partition table
-          q # and we're done
-      EOF
-      fi
-
-      if ! test -L /dev/disk/by-label/persist; then
-        mkfs.ext4 -L persist /dev/sda1
-      fi
-
-      mkfs.ext4 -L root -F /dev/sda2
-    '';
-
-    fileSystems."/old-nix-store" =
-      { fsType = "ext4";
-        device = "../nix-store.ext4";
+    # In stage 1, mount a tmpfs on top of /nix/store (the squashfs
+    # image) to make this a live CD.
+    fileSystems."/nix/.ro-store" =
+      { fsType = "squashfs";
+        device = "../nix-store.squashfs";
         options = [ "loop" ];
         neededForBoot = true;
       };
 
-    fileSystems."/" =
-      { fsType = "ext4";
-        device = "/dev/disk/by-label/root";
-      };
-
-    fileSystems."/persist" =
-      { fsType = "ext4";
-        device = "/dev/disk/by-label/persist";
+    fileSystems."/nix/.rw-store" =
+      { fsType = "tmpfs";
+        options = [ "mode=0755" ];
         neededForBoot = true;
       };
 
-    boot.initrd.availableKernelModules = [ "ext4" ];
+    fileSystems."/nix/store" =
+      { fsType = "unionfs-fuse";
+        device = "unionfs";
+        options = [ "allow_other" "cow" "nonempty" "chroot=/mnt-root" "max_files=32768" "hide_meta_files" "dirs=/nix/.rw-store=rw:/nix/.ro-store=ro" ];
+      };
+
+    boot.initrd.availableKernelModules = [ "squashfs" ];
 
     boot.initrd.kernelModules = [ "loop" ];
 
@@ -87,10 +66,9 @@ with lib;
       [ config.system.build.toplevel ];
 
     # Create the squashfs image that contains the Nix store.
-    system.build.ext4Store = import "${pkgs.path}/nixos/lib/make-ext4-fs.nix" {
-      inherit pkgs;
-      storePaths = config.netboot.storeContents;
-      volumeLabel = "NETBOOTEXT4";
+    system.build.squashfsStore = import "${pkgs.path}/nixos/lib/make-squashfs.nix" {
+      inherit (pkgs) stdenv squashfsTools perl pathsFromGraph;
+      storeContents = config.netboot.storeContents;
     };
 
 
@@ -100,8 +78,8 @@ with lib;
       prepend = [ "${config.system.build.initialRamdisk}/initrd" ];
 
       contents =
-        [ { object = config.system.build.ext4Store;
-            symlink = "/nix-store.ext4";
+        [ { object = config.system.build.squashfsStore;
+            symlink = "/nix-store.squashfs";
           }
         ];
     };

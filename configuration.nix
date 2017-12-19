@@ -29,7 +29,7 @@ let
       set -eu
       set -o pipefail
 
-      PATH="${pkgs.rsync}/bin:${pkgs.coreutils}/bin:${pkgs.eject}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.e2fsprogs}/bin"
+      PATH="${pkgs.coreutils}/bin:${pkgs.eject}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.e2fsprogs}/bin"
 
       exec ${./persistence.sh}
     '';
