@@ -50,15 +50,27 @@ with lib;
         neededForBoot = true;
       };
 
-    fileSystems."/nix/store" =
-      { fsType = "unionfs-fuse";
-        device = "unionfs";
-        options = [ "allow_other" "cow" "nonempty" "chroot=/mnt-root" "max_files=32768" "hide_meta_files" "dirs=/nix/.rw-store=rw:/nix/.ro-store=ro" ];
-      };
+    boot.initrd.postMountCommands = ''
+      mkdir -p /mnt-root/nix/.rw-store/work
+      mkdir -p /mnt-root/nix/.rw-store/store
+      echo "overlay /mnt-root/nix/store overlay lowerdir=/mnt-root/nix/.ro-store,upperdir=/mnt-root/nix/.rw-store/store,workdir=/mnt-root/nix/.rw-store/work," >> /etc/fstab
+      mkdir -p /mnt-root/nix/store
+      mount /mnt-root/nix/store
+    '';
 
-    boot.initrd.availableKernelModules = [ "squashfs" ];
+#     fileSystems."/nix/store" =
+#       { fsType = "overlay";
+#         device = "overlay";
+#         options = [
+#           "lowerdir=/mnt-root/nix/.ro-store"
+#           "upperdir=/mnt-root/nix/.rw-store/store"
+#           "workdir=/mnt-root/nix/.rw-store/work"
+#         ];
+#       };
+#
+    boot.initrd.availableKernelModules = [ "squashfs" "overlay" ];
 
-    boot.initrd.kernelModules = [ "loop" ];
+    boot.initrd.kernelModules = [ "loop" "overlay" ];
 
     # Closures to be copied to the Nix store, namely the init
     # script and the top-level system configuration directory.
