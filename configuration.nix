@@ -40,8 +40,6 @@ in makeNetboot {
   system = "aarch64-linux";
   modules = [
     "${pkgs.path}/nixos/modules/profiles/all-hardware.nix"
-    "${pkgs.path}/nixos/modules/profiles/base.nix"
-    "${pkgs.path}/nixos/modules/profiles/installation-device.nix"
     "${pkgs.path}/nixos/modules/profiles/minimal.nix"
 
     ./modules/netboot.nix
@@ -60,13 +58,8 @@ in makeNetboot {
       nixpkgs.system = "aarch64-linux";
     }
 
-    ({lib, ...}: { # Overrides needed from the netboot-minimal.nix
-      security.sudo.enable = lib.mkForce true;
-      systemd.services.sshd.wantedBy = lib.mkForce [ "multi-user.target" ];
-      services.mingetty.autologinUser = lib.mkForce null;
-    })
-
     ({pkgs, ...}: { # Config specific to this purpose
+      systemd.services.openssh.enable = true;
       boot.initrd.postMountCommands = "${persistence}";
       boot.postBootCommands = ''
         ls -la /
