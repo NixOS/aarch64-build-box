@@ -40,6 +40,11 @@ let
       keys = ./keys/grahamc;
     };
 
+    kamilchm = {
+      trusted = true;
+      keys = ./keys/kamilchm;
+    };
+
     moretea = {
       trusted = true;
       keys = ./keys/moretea;
