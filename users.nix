@@ -54,6 +54,11 @@ let
       trusted = true;
       keys = ./keys/vcunat;
     };
+
+    yegortimoshenko = {
+      trusted = true;
+      keys = ./keys/yegortimoshenko;
+    };
   };
 
   ifAttr = key: default: result: opts:
