@@ -22,7 +22,7 @@ cfgOpt() {
 }
 
 buildHost=$(cfgOpt "buildHost")
-target=$(cfgOpt "targetName")
+target=$(cfgOpt "imageName")
 pxeHost=$(cfgOpt "pxeHost")
 pxeDir=$(cfgOpt "pxeDir")
 
