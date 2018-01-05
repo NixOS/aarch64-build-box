@@ -50,6 +50,11 @@ let
       keys = ./keys/kamilchm;
     };
 
+    lheckemann = {
+      trusted = true;
+      keys = ./keys/lheckemann;
+    };
+
     moretea = {
       trusted = true;
       keys = ./keys/moretea;
