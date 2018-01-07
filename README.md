@@ -34,18 +34,18 @@ I trust everyone who has access, but with limits:
 1. I would comfortably run results from this builder on my Raspberry
    Pi that I don't use for secret things.
 
-2. I ***DO NOT*** trust this builder for systems that contain private
+2. ***DO NOT*** trust this builder for systems that contain private
    data or tools.
 
-3. I ***DO NOT*** trust this builder to make binary bootstrap tools,
+3. ***DO NOT*** trust this builder to make binary bootstrap tools,
    because we have to trust those bootstrap tools for a long time to
    not be compromised.
 
-4. I ***DO NOT*** trust this builder to make tools used to make binary
+4. ***DO NOT*** trust this builder to make tools used to make binary
    bootstrap tools, because we have to trust those bootstrap tools for
    a long time to not be compromised.
 
-5. I ***DO NOT*** trust this builder to build the disk image for this
+5. ***DO NOT*** trust this builder to build the disk image for this
    builder.
 
 IF YOU ARE: making binary bootstrap tools, please only use tools
