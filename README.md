@@ -11,9 +11,7 @@ lose everything on the hard drive.
 
 # Configuring your computer for remote builds
 
-1. Put this in your configuration.nix
-2. As root run `ssh your-user-name@147.75.79.198 -i /root/a-private-key`
-   and make sure it works. If not, ping me and I'll check logs.
+First, put this in your `configuration.nix`:
 
 ```nix
 {
@@ -21,7 +19,7 @@ lose everything on the hard drive.
     distributedBuilds = true;
     buildMachines = [
       {
-        hostName = "147.75.79.198";
+        hostName = "aarch64.nixos.community";
         maxJobs = 96;
         sshKey = "/root/a-private-key";
         sshUser = "your-user-name";
@@ -33,6 +31,26 @@ lose everything on the hard drive.
 }
 ```
 
+Then run an initial SSH connection as root to setup the trust
+fingerprint:
+
+
+```
+$ sudo su
+# ssh your-user-name@aarch64.nixos.community -i /root/a-private-key
+```
+
+The fingerprint should always be:
+
+```
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMUTz5i9u5H2FHNAmZJyoJfIGyUm/HfGhfwnc142L3ds
+```
+
+***If it is not, please open an issue!***
+
+Finally, `nix-build . -A hello --option system aarch64-linux`.
+
+If this doesn't work, ping @grahamc and I can help debug.
 
 ---
 
