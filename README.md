@@ -1,4 +1,10 @@
-# Want access? Open a PR adding yourself to users.nix
+
+
+# Want access?
+
+1. You must read literally this entire README. It is critically
+   important that you do so.
+2. Open a PR adding yourself to users.nix
 
 I'll grant access to well known members of the community, and people
 well known members in the community trust.

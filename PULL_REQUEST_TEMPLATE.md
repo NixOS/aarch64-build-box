@@ -1,1 +1,3 @@
-- [ ] I have read and fully understand https://github.com/nix-community/aarch64-build-box#notes-on-security-and-safety
+- [ ] I have read the entire README https://github.com/nix-community/aarch64-build-box
+- [ ] I completely understood the README https://github.com/nix-community/aarch64-build-box
+- [ ] I know when I can't trust the builder, as explained in the README
