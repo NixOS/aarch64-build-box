@@ -106,15 +106,4 @@ If this doesn't work, ping @grahamc and I can help debug.
 
 ---
 
-Building: Make a `build.cfg` file:
-
-```
-buildHost       user@an-aarch64-capable-build-box
-imageName       nixos-packet-aarch64-2018-01-03v1
-pxeHost         user@web-accessible-server
-pxeDir          /path/to/web/root
-```
-
-The build will happen on `buildHost` then SCPd directly from buildHost
-to `pxeHost:pxeDir/imageName`. If this directory already exists, it
-will be deleted.
+ps: if you want to build the netbooted image, check out `./DEV_NOTES`
