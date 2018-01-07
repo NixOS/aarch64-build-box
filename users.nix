@@ -65,6 +65,11 @@ let
       keys = ./keys/moretea;
     };
 
+    mic92 = {
+      trusted = true;
+      keys = ./keys/mic92;
+    };
+
     vcunat = {
       trusted = true;
       keys = ./keys/vcunat;
