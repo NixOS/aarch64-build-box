@@ -33,16 +33,16 @@ let
       keys = ./keys/flokli;
     };
 
+    globin = {
+      trusted = true;
+      keys = ./keys/globin;
+    };
+
     grahamc = {
       sudo = true;
       trusted = true;
       password = "$6$lAjIm6PyElKewH$WfO/3pGei09YstCXghkCx5bDUvxsou2h63HMMTHgA/5tF8AsU6iw36PZm66z34n4oxW13yTUXaUAuKP/aHepg.";
       keys = ./keys/grahamc;
-    };
-
-    globin = {
-      trusted = true;
-      keys = ./keys/globin;
     };
 
     jtojnar = {
@@ -60,14 +60,14 @@ let
       keys = ./keys/lheckemann;
     };
 
-    moretea = {
-      trusted = true;
-      keys = ./keys/moretea;
-    };
-
     mic92 = {
       trusted = true;
       keys = ./keys/mic92;
+    };
+
+    moretea = {
+      trusted = true;
+      keys = ./keys/moretea;
     };
 
     vcunat = {
