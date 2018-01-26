@@ -18,6 +18,11 @@ let
       keys = ./keys/andir;
     };
 
+    cstrahan = {
+      trusted = true;
+      keys = ./keys/cstrahan;
+    };
+
     dezgeg = {
       trusted = true;
       keys = ./keys/dezgeg;
