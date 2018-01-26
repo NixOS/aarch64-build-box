@@ -34,6 +34,10 @@ current_url=$(
         | jq -r '.ipxe_script_url'
            );
 
+if [ "$1" == "--force" ]; then
+    current_url="...";
+fi
+
 if [ "$new_url" != "$current_url" ]; then
     curl --verbose -X PUT \
          --header 'Content-Type: application/json' \
