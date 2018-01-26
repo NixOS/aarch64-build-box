@@ -65,6 +65,11 @@ let
       keys = ./keys/lheckemann;
     };
 
+    lnl = {
+      trusted = true;
+      keys = ./keys/lnl;
+    };
+
     mic92 = {
       trusted = true;
       keys = ./keys/mic92;
