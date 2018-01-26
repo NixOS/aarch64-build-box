@@ -34,7 +34,7 @@ current_url=$(
         | jq -r '.ipxe_script_url'
            );
 
-if [ "$1" == "--force" ]; then
+if [ "${1:-x}" == "--force" ]; then
     current_url="...";
 fi
 
