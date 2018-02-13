@@ -33,6 +33,11 @@ let
       keys = ./keys/dhess;
     };
 
+    dtz = {
+      trusted = true;
+      keys = ./keys/dtz;
+    };
+
     flokli = {
       trusted = true;
       keys = ./keys/flokli;
