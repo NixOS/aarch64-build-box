@@ -44,19 +44,21 @@ in makeNetboot {
 
     ./modules/netboot.nix
 
-    { # Hardware Tuning
+    ({ pkgs, ...}: { # Hardware Tuning
       boot = {
+        # consoleLogLevel = 7;
         initrd.availableKernelModules = [ "ahci" "pci_thunder_ecam" ];
 
         kernelParams = [
-          "cma=0M" "biosdevname=0" "net.ifnames=0" "console=ttyAMA0"
+          "cma=0M" "biosdevname=0" "net.ifnames=0" "console=ttyAMA0,115200"
           "initrd=initrd"
         ];
+        kernelPackages = pkgs.linuxPackages_latest;
       };
 
       nix.maxJobs = 96;
       nixpkgs.system = "aarch64-linux";
-    }
+    })
 
     ({pkgs, ...}: { # Config specific to this purpose
       services.openssh.enable = true;
@@ -142,6 +144,7 @@ in makeNetboot {
             PrivateTmp = true;
             WorkingDirectory = "/var/lib/gc-of-borg";
             Restart = "always";
+            RestartSec = "10s";
           };
 
           preStart = ''
