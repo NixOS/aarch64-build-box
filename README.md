@@ -89,6 +89,14 @@ First, put this in your `configuration.nix`:
 }
 ```
 
+**Note:** Make sure the SSH key specified above does *not* have a
+password, otherwise `nix-build` will give an error along the lines of:
+
+> unable to open SSH connection to
+> 'ssh://your-user-name@aarch64.nixos.community': cannot connect to
+> 'your-user-name@aarch64.nixos.community'; trying other available
+> machines...
+
 Then run an initial SSH connection as root to setup the trust
 fingerprint:
 
