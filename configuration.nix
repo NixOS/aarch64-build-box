@@ -44,7 +44,7 @@ in makeNetboot {
 
     ./modules/netboot.nix
 
-    ({ pkgs, ...}: { # Hardware Tuning
+    ({ pkgs, config, ...}: { # Hardware Tuning
       boot = {
         # consoleLogLevel = 7;
         initrd.availableKernelModules = [ "ahci" "pci_thunder_ecam" ];
@@ -56,6 +56,7 @@ in makeNetboot {
         kernelPackages = pkgs.linuxPackages_latest;
       };
 
+      nix.nrBuildUsers = config.nix.maxJobs * 2;
       nix.maxJobs = 96;
       nixpkgs.system = "aarch64-linux";
     })
@@ -162,11 +163,15 @@ in makeNetboot {
             ${ofborg}/bin/builder /persist/ofborg/config-${id}.json
           '';
         };
-      in {
-        grahamcofborg-builder-1 = builder "1";
-        grahamcofborg-builder-2 = builder "2";
-        grahamcofborg-builder-3 = builder "3";
-      };
+
+        makeNBuilders = count:
+          let
+            toMake = pkgs.lib.range 1 count;
+            services = map
+              (n: { "grahamcofborg-builder-${toString n}" = builder (toString n); })
+              toMake;
+          in pkgs.lib.foldr (x: y: x // y) {} services;
+      in makeNBuilders 32;
     })
 
     ./users.nix
