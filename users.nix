@@ -85,6 +85,11 @@ let
       keys = ./keys/moretea;
     };
 
+    samueldr = {
+      trusted = true;
+      keys = ./keys/samueldr;
+    };
+
     vcunat = {
       trusted = true;
       keys = ./keys/vcunat;
