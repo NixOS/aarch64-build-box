@@ -39,7 +39,7 @@ trap cleanup EXIT
 
 set -eux
 
-drv=$(nix-instantiate ./configuration.nix)
+drv=$(nix-instantiate ./configuration.nix --show-trace)
 NIX_SSHOPTS=$SSHOPTS nix-copy-closure --to "$buildHost" "$drv"
 out=$(ssh $SSHOPTS "$buildHost" NIX_REMOTE=daemon nix-store -r "$drv" -j 5)
 
