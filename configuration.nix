@@ -61,52 +61,52 @@ in makeNetboot {
       nixpkgs.system = "aarch64-linux";
     })
 
-    ({ pkgs, config, ... }: { # Go fast: networking
-      networking = {
-        nameservers = [
-          "4.2.2.1"
-          "4.2.2.2"
-          "2001:4860:4860::8888"
-        ];
-
-        defaultGateway = {
-          address = "147.75.79.197";
-          interface = "bond0";
-        };
-
-        defaultGateway6 = {
-          address = "2604:1380:0:d600::4";
-          interface = "bond0";
-        };
-
-        bonds.bond0 = {
-          driverOptions.mode = "802.3ad";
-          interfaces = [
-            "eth0" "eth1"
-          ];
-        };
-
-        interfaces.bond0 = {
-          useDHCP = true;
-
-          ip4 = [
-            { address = "147.75.79.198";
-              prefixLength = 30;
-            }
-            { address = "10.99.98.133";
-              prefixLength = 31;
-            }
-          ];
-
-          ip6 = [
-            { address = "2604:1380:0:d600::5";
-              prefixLength = 127;
-            }
-          ];
-        };
-      };
-    })
-
+#    ({ pkgs, config, ... }: { # Go fast: networking
+#      networking = {
+#        nameservers = [
+#          "4.2.2.1"
+#          "4.2.2.2"
+#          "2001:4860:4860::8888"
+#        ];
+#
+#        defaultGateway = {
+#          address = "147.75.79.197";
+#          interface = "bond0";
+#        };
+#
+#        defaultGateway6 = {
+#          address = "2604:1380:0:d600::4";
+#          interface = "bond0";
+#        };
+#
+#        bonds.bond0 = {
+#          driverOptions.mode = "802.3ad";
+#          interfaces = [
+#            "eth0" "eth1"
+#          ];
+#        };
+#
+#        interfaces.bond0 = {
+#          useDHCP = true;
+#
+#          ip4 = [
+#            { address = "147.75.79.198";
+#              prefixLength = 30;
+#            }
+#            { address = "10.99.98.133";
+#              prefixLength = 31;
+#            }
+#          ];
+#
+#          ip6 = [
+#            { address = "2604:1380:0:d600::5";
+#              prefixLength = 127;
+#            }
+#          ];
+#        };
+#      };
+#    })
+#
     ({pkgs, ...}: { # Config specific to this purpose
       services.openssh.enable = true;
 
