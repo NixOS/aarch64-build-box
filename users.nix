@@ -18,6 +18,11 @@ let
       keys = ./keys/andir;
     };
 
+    bkchr = {
+      trusted = true;
+      keys = ./keys/bkchr;
+    };
+
     cstrahan = {
       trusted = true;
       keys = ./keys/cstrahan;
