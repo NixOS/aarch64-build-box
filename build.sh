@@ -1,6 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env nix-shell
+#!nix-shell -p nixUnstable -i bash
 
-set -eu
+set -eux
 set -o pipefail
 
 if [ "${1:-x}" = "x" ]; then
