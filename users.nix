@@ -48,6 +48,11 @@ let
       keys = ./keys/flokli;
     };
 
+    expipiplus1 = {
+      trusted = true;
+      keys = ./keys/expipiplus1;
+    };
+
     globin = {
       trusted = true;
       keys = ./keys/globin;
