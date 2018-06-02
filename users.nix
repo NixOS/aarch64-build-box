@@ -85,6 +85,11 @@ let
       keys = ./keys/lnl;
     };
 
+    matthewbauer = {
+      trusted = true;
+      keys = ./keys/matthewbauer;
+    };
+
     mic92 = {
       trusted = true;
       keys = ./keys/mic92;
