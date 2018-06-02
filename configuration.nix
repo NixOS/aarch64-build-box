@@ -61,52 +61,63 @@ in makeNetboot {
       nixpkgs.system = "aarch64-linux";
     })
 
-#    ({ pkgs, config, ... }: { # Go fast: networking
-#      networking = {
-#        nameservers = [
-#          "4.2.2.1"
-#          "4.2.2.2"
-#          "2001:4860:4860::8888"
-#        ];
-#
-#        defaultGateway = {
-#          address = "147.75.79.197";
-#          interface = "bond0";
-#        };
-#
-#        defaultGateway6 = {
-#          address = "2604:1380:0:d600::4";
-#          interface = "bond0";
-#        };
-#
-#        bonds.bond0 = {
-#          driverOptions.mode = "802.3ad";
-#          interfaces = [
-#            "eth0" "eth1"
-#          ];
-#        };
-#
-#        interfaces.bond0 = {
-#          useDHCP = true;
-#
-#          ip4 = [
-#            { address = "147.75.79.198";
-#              prefixLength = 30;
-#            }
-#            { address = "10.99.98.133";
-#              prefixLength = 31;
-#            }
-#          ];
-#
-#          ip6 = [
-#            { address = "2604:1380:0:d600::5";
-#              prefixLength = 127;
-#            }
-#          ];
-#        };
-#      };
-#    })
-#
+    ({ # Go fast: networking
+      networking.hostName = "arm-community";
+      networking.dhcpcd.enable = false;
+      networking.defaultGateway = {
+        address = "147.75.79.197";
+        interface = "bond0";
+      };
+      networking.defaultGateway6 = {
+        address = "2604:1380:0:d600::4";
+        interface = "bond0";
+      };
+      networking.nameservers = [
+        "147.75.207.207"
+        "147.75.207.208"
+      ];
+
+      networking.bonds.bond0 = {
+        driverOptions.mode = "802.3ad";
+        interfaces = [
+          "eth0" "eth1"
+        ];
+      };
+
+      networking.interfaces.bond0 = {
+        useDHCP = false;
+
+        ipv4 = {
+          routes = [
+            {
+              address = "10.0.0.0";
+              prefixLength = 8;
+              via = "10.99.98.132";
+            }
+          ];
+          addresses = [
+            {
+              address = "147.75.79.198";
+              prefixLength = 30;
+            }
+            {
+              address = "10.99.98.133";
+              prefixLength = 31;
+            }
+          ];
+        };
+
+        ipv6 = {
+          addresses = [
+            {
+              address = "2604:1380:0:d600::5";
+              prefixLength = 127;
+            }
+          ];
+        };
+      };
+    })
+
     ({pkgs, ...}: { # Config specific to this purpose
       services.openssh.enable = true;
 
