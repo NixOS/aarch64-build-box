@@ -13,6 +13,11 @@ let
     #      keys = ./keys/youruser;
     #    };
 
+    adisbladis = {
+      trusted = true;
+      keys = ./keys/adisbladis;
+    };
+
     andir = {
       trusted = true;
       keys = ./keys/andir;
