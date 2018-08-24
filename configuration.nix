@@ -78,7 +78,14 @@ in makeNetboot {
       ];
 
       networking.bonds.bond0 = {
-        driverOptions.mode = "802.3ad";
+        driverOptions = {
+          mode = "802.3ad";
+          xmit_hash_policy = "layer3+4";
+          lacp_rate = "fast";
+          downdelay = "200";
+          miimon = "100";
+          updelay = "200";
+        };
         interfaces = [
           "eth0" "eth1"
         ];
