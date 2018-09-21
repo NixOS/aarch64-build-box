@@ -100,6 +100,11 @@ let
       keys = ./keys/mic92;
     };
 
+    mog = {
+      trusted = true;
+      keys = ./keys/mog;
+    };
+
     moretea = {
       trusted = true;
       keys = ./keys/moretea;
