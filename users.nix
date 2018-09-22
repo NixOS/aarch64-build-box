@@ -13,6 +13,11 @@ let
     #      keys = ./keys/youruser;
     #    };
 
+    adisbladis = {
+      trusted = true;
+      keys = ./keys/adisbladis;
+    };
+
     andir = {
       trusted = true;
       keys = ./keys/andir;
@@ -85,9 +90,19 @@ let
       keys = ./keys/lnl;
     };
 
+    matthewbauer = {
+      trusted = true;
+      keys = ./keys/matthewbauer;
+    };
+
     mic92 = {
       trusted = true;
       keys = ./keys/mic92;
+    };
+
+    mog = {
+      trusted = true;
+      keys = ./keys/mog;
     };
 
     moretea = {
