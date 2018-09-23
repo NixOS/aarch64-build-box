@@ -240,5 +240,6 @@ in makeNetboot {
 
     ./users.nix
     ./monitoring.nix
+    ./motd.nix
   ];
 }
