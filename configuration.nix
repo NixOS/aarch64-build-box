@@ -126,7 +126,11 @@ in makeNetboot {
     })
 
     ({pkgs, ...}: { # Config specific to this purpose
-      services.openssh.enable = true;
+      services.openssh = {
+        enable = true;
+        challengeResponseAuthentication = false;
+        passwordAuthentication = false;
+      };
 
       boot.initrd.postMountCommands = "${persistence}";
       boot.postBootCommands = ''
