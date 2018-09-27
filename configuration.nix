@@ -46,30 +46,40 @@ in makeNetboot {
 
     ({ pkgs, config, ...}: { # Hardware Tuning
       boot = {
-        # consoleLogLevel = 7;
-        initrd.availableKernelModules = [ "ahci" "pci_thunder_ecam" ];
+        consoleLogLevel = 7;
+        initrd.availableKernelModules = [ "ahci" "pci_thunder_ecam" "hisi-rng" ];
 
         kernelParams = [
           "cma=0M" "biosdevname=0" "net.ifnames=0" "console=ttyAMA0,115200"
           "initrd=initrd"
         ];
-        kernelPackages = pkgs.linuxPackages_latest;
+        kernelPackages = pkgs.linuxPackages_4_17;
       };
 
       nix.nrBuildUsers = config.nix.maxJobs * 2;
       nix.maxJobs = 96;
       nixpkgs.system = "aarch64-linux";
+
+      nixpkgs.config.packageOverrides = pkgs: {
+        linux_4_17 = pkgs.linux_4_17.override {
+          extraConfig =
+            ''
+              ARCH_HISI y
+              HNS_ENET y
+            '';
+          };
+        };
     })
 
     ({ # Go fast: networking
-      networking.hostName = "arm-community";
+      networking.hostName = "arm-community-2a2";
       networking.dhcpcd.enable = false;
       networking.defaultGateway = {
-        address = "147.75.79.197";
+        address = "147.75.77.189";
         interface = "bond0";
       };
       networking.defaultGateway6 = {
-        address = "2604:1380:0:d600::4";
+        address = "2604:1380:0:d600::6";
         interface = "bond0";
       };
       networking.nameservers = [
@@ -87,7 +97,7 @@ in makeNetboot {
           updelay = "200";
         };
         interfaces = [
-          "eth0" "eth1"
+          "eth2" "eth3"
         ];
       };
 
@@ -99,16 +109,16 @@ in makeNetboot {
             {
               address = "10.0.0.0";
               prefixLength = 8;
-              via = "10.99.98.132";
+              via = "10.99.98.134";
             }
           ];
           addresses = [
             {
-              address = "147.75.79.198";
+              address = "147.75.77.190";
               prefixLength = 30;
             }
             {
-              address = "10.99.98.133";
+              address = "10.99.98.135";
               prefixLength = 31;
             }
           ];
@@ -117,7 +127,7 @@ in makeNetboot {
         ipv6 = {
           addresses = [
             {
-              address = "2604:1380:0:d600::5";
+              address = "2604:1380:0:d600::7";
               prefixLength = 127;
             }
           ];

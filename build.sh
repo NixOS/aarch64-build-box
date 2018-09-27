@@ -1,5 +1,4 @@
-#!/usr/bin/env nix-shell
-#!nix-shell -p nixUnstable -i bash
+#!/usr/bin/env bash
 
 set -eux
 set -o pipefail
