@@ -72,7 +72,7 @@ in makeNetboot {
     })
 
     ({ # Go fast: networking
-      networking.hostName = "arm-community-2a2";
+      networking.hostName = "aarch64.nixos.community";
       networking.dhcpcd.enable = false;
       networking.defaultGateway = {
         address = "147.75.77.189";
