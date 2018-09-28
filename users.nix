@@ -115,6 +115,11 @@ let
       keys = ./keys/samueldr;
     };
 
+    tomberek = {
+      trusted = true;
+      keys = ./keys/tomberek;
+    };
+
     vcunat = {
       trusted = true;
       keys = ./keys/vcunat;
