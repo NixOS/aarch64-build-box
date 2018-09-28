@@ -1,1 +1,2 @@
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINyxBrYrpql9WJ4m+1Hex+OT5Bxd1HPZZmUwa6MIvZ+E aarch64-build-box (20171217)
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDEQOua9D1qdHoVdv/R1gutZji0ux/6LoUdG+YWSGkQ6 remote builder aarch64.nixos.community (20180928)
