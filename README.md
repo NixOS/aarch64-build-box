@@ -78,7 +78,7 @@ First, put this in your `configuration.nix`:
     buildMachines = [
       {
         hostName = "aarch64.nixos.community";
-        maxJobs = 96;
+        maxJobs = 64;
         sshKey = "/root/a-private-key";
         sshUser = "your-user-name";
         system = "aarch64-linux";

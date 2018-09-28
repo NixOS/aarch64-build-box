@@ -57,7 +57,7 @@ in makeNetboot {
       };
 
       nix.nrBuildUsers = config.nix.maxJobs * 2;
-      nix.maxJobs = 96;
+      nix.maxJobs = 64;
       nixpkgs.system = "aarch64-linux";
 
       nixpkgs.config.packageOverrides = pkgs: {
