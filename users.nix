@@ -111,6 +111,7 @@ let
     };
 
     samueldr = {
+      sudo = true;
       trusted = true;
       keys = ./keys/samueldr;
     };
