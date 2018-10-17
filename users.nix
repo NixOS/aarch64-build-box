@@ -81,6 +81,7 @@ let
     };
 
     lheckemann = {
+      sudo = true;
       trusted = true;
       keys = ./keys/lheckemann;
     };
