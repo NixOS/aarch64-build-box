@@ -105,6 +105,11 @@ let
       keys = ./keys/mog;
     };
 
+    moredread = {
+      trusted = true;
+      keys = ./keys/moredread;
+    };
+
     moretea = {
       trusted = true;
       keys = ./keys/moretea;
