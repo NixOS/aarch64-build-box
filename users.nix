@@ -131,6 +131,11 @@ let
       keys = ./keys/vcunat;
     };
 
+    volth = {
+      trusted = true;
+      keys = ./keys/volth;
+    };
+
     yegortimoshenko = {
       trusted = true;
       keys = ./keys/yegortimoshenko;
