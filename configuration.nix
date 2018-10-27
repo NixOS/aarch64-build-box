@@ -141,6 +141,7 @@ in makeNetboot {
         challengeResponseAuthentication = false;
         passwordAuthentication = false;
       };
+      security.sudo.wheelNeedsPassword = false;
 
       boot.initrd.postMountCommands = "${persistence}";
       boot.postBootCommands = ''
