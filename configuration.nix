@@ -167,6 +167,10 @@ in makeNetboot {
         package = pkgs.nixUnstable;
 
         useSandbox = true;
+
+        extraOptions = ''
+          extra-platforms = armv7l-linux
+        '';
       };
     })
 
