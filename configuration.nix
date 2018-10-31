@@ -29,7 +29,7 @@ let
       set -eu
       set -o pipefail
 
-      PATH="${pkgs.coreutils}/bin:${pkgs.eject}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.e2fsprogs}/bin"
+      PATH="${pkgs.coreutils}/bin:${pkgs.utillinux}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.e2fsprogs}/bin"
 
       exec ${./persistence.sh}
     '';
@@ -53,7 +53,7 @@ in makeNetboot {
           "cma=0M" "biosdevname=0" "net.ifnames=0" "console=ttyAMA0,115200"
           "initrd=initrd"
         ];
-        kernelPackages = pkgs.linuxPackages_4_17;
+        kernelPackages = pkgs.linuxPackages_4_18;
       };
 
       nix.nrBuildUsers = config.nix.maxJobs * 2;
