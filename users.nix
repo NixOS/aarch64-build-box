@@ -116,6 +116,11 @@ let
       keys = ./keys/moretea;
     };
 
+    Profpatsch = {
+      trusted = true;
+      keys = ./keys/Profpatsch;
+    };
+
     samueldr = {
       sudo = true;
       trusted = true;
