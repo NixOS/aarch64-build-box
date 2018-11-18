@@ -23,6 +23,11 @@ let
       keys = ./keys/andir;
     };
 
+    bennofs = {
+      trusted = true;
+      keys = ./keys/bennofs;
+    };
+
     bkchr = {
       trusted = true;
       keys = ./keys/bkchr;
