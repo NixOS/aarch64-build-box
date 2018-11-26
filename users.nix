@@ -142,6 +142,11 @@ let
       keys = ./keys/volth;
     };
 
+    willibutz = {
+      trusted = true;
+      keys = ./keys/willibutz;
+    };
+
     yegortimoshenko = {
       trusted = true;
       keys = ./keys/yegortimoshenko;
