@@ -48,6 +48,11 @@ let
       keys = ./keys/dhess;
     };
 
+    clever = {
+      trusted = true;
+      keys = ./keys/clever;
+    };
+
     dtz = {
       trusted = true;
       keys = ./keys/dtz;
