@@ -45,8 +45,8 @@ with lib;
       };
 
     fileSystems."/nix/.rw-store" =
-      { fsType = "tmpfs";
-        options = [ "mode=0755" ];
+      { fsType = "ext4";
+        device = "/dev/disk/by-label/scratch-space";
         neededForBoot = true;
       };
 
