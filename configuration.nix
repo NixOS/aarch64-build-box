@@ -22,7 +22,19 @@ let
         '';
       };
 
-  persistence = pkgs.writeScript "persistence"
+  postDeviceCommands = pkgs.writeScript "post-device-commands"
+    ''
+      #!/bin/sh
+
+      set -eu
+      set -o pipefail
+
+      PATH="${pkgs.coreutils}/bin:${pkgs.utillinux}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.e2fsprogs}/bin"
+
+      exec ${./post-devices.sh}
+    '';
+
+  postMountCommands = pkgs.writeScript "post-mount-commands"
     ''
       #!/bin/sh
 
@@ -143,7 +155,8 @@ in makeNetboot {
       };
       security.sudo.wheelNeedsPassword = false;
 
-      boot.initrd.postMountCommands = "${persistence}";
+      boot.initrd.postDeviceCommands = "${postDeviceCommands}";
+      boot.initrd.postMountCommands = "${postMountCommands}";
       boot.postBootCommands = ''
         ls -la /
         rm /etc/ssh/ssh_host_*
