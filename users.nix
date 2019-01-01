@@ -157,6 +157,11 @@ let
       keys = ./keys/willibutz;
     };
 
+    xeji = {
+      trusted = true;
+      keys = ./keys/xeji;
+    };
+
     yegortimoshenko = {
       trusted = true;
       keys = ./keys/yegortimoshenko;
