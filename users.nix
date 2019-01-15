@@ -101,6 +101,11 @@ let
       keys = ./keys/lnl;
     };
 
+    makefu = {
+      trusted = true;
+      keys = ./keys/makefu;
+    };
+
     matthewbauer = {
       trusted = true;
       keys = ./keys/matthewbauer;
