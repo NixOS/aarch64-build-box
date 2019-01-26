@@ -152,6 +152,9 @@ in makeNetboot {
         enable = true;
         challengeResponseAuthentication = false;
         passwordAuthentication = false;
+        extraConfig = ''
+          MaxSessions 65
+        '';
       };
       security.sudo.wheelNeedsPassword = false;
 
