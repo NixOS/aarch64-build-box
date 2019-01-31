@@ -90,6 +90,11 @@ let
       keys = ./keys/kamilchm;
     };
 
+    leo60228 = {
+      trusted = true;
+      keys = ./keys/leo60228;
+    };
+    
     lheckemann = {
       sudo = true;
       trusted = true;
