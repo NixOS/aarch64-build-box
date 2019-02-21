@@ -68,6 +68,11 @@ let
       keys = ./keys/expipiplus1;
     };
 
+    georgyo = {
+      trusted = true;
+      keys = ./keys/georgyo;
+    };
+
     globin = {
       trusted = true;
       keys = ./keys/globin;
