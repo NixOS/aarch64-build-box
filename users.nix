@@ -58,6 +58,11 @@ let
       keys = ./keys/dtz;
     };
 
+    etu = {
+      trusted = true;
+      keys = ./keys/etu;
+    };
+
     flokli = {
       trusted = true;
       keys = ./keys/flokli;
