@@ -141,6 +141,11 @@ let
       keys = ./keys/Profpatsch;
     };
 
+    rnhmjoj = {
+      trusted = true;
+      keys = ./keys/rnhmjoj;
+    };
+
     samueldr = {
       sudo = true;
       trusted = true;
