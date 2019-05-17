@@ -136,6 +136,11 @@ let
       keys = ./keys/moretea;
     };
 
+    nickhu = {
+      trusted = true;
+      keys = ./keys/nickhu;
+    };
+
     Profpatsch = {
       trusted = true;
       keys = ./keys/Profpatsch;
