@@ -95,6 +95,11 @@ let
       keys = ./keys/kamilchm;
     };
 
+    kiwi = {
+      trusted = true;
+      keys = ./keys/kiwi;
+    };
+
     lheckemann = {
       sudo = true;
       trusted = true;
