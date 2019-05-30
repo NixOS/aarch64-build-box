@@ -38,7 +38,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-set -eux
+set -eu
 
 drv=$(nix-instantiate ./configuration.nix --show-trace)
 NIX_SSHOPTS=$SSHOPTS nix-copy-closure --to "$buildHost" "$drv"
