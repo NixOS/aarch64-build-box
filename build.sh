@@ -50,11 +50,11 @@ psk=$(head -c 9000 /dev/urandom | md5sum | awk '{print $1}')
 
 ssh "$pxeHost" rm -rf "${pxeDir}/${target}.old"
 ssh "$pxeHost" mv "${pxeDir}/${target}" "${pxeDir}/${target}.old"
-ssh "$pxeHost" -- nix-shell -p openssl --run \
+ssh "$pxeHost" -- nix-shell -p mbuffer openssl --run \
     "openssl s_server -nocert -naccept 1 \
          -psk $psk -accept ${opensslPort} \
-       | tar -C ${pxeDir}/${target} -zx"
-ssh $SSHOPTS "$buildhost" -- nix-shell -p openssl --run \
+       | mbuffer | tar -C ${pxeDir}/${target} -zx"
+ssh $SSHOPTS "$buildhost" -- nix-shell -p mbuffer openssl --run \
     "tar -cf $out/{Image,initrd,netboot.ipxe} \
-       | openssl s_client -psk $psk \
+       | mbuffer | openssl s_client -psk $psk \
            -connect ${opensslServer}:${opensslPort}"
