@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -p awk -i bash
+#!nix-shell -p gawk -i bash
 
 set -eu
 set -o pipefail
