@@ -65,7 +65,7 @@ in makeNetboot {
           "cma=0M" "biosdevname=0" "net.ifnames=0" "console=ttyAMA0,115200"
           "initrd=initrd"
         ];
-        kernelPackages = pkgs.linuxPackages_4_18;
+        kernelPackages = pkgs.linuxPackages_latest;
       };
 
       nix.nrBuildUsers = config.nix.maxJobs * 2;
