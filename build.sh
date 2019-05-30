@@ -1,6 +1,7 @@
-#!/usr/bin/env bash
+#!/usr/bin/env nix-shell
+#!nix-shell -p awk -i bash
 
-set -eux
+set -eu
 set -o pipefail
 
 if [ "${1:-x}" = "x" ]; then
