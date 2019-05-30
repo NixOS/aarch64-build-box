@@ -26,6 +26,8 @@ buildHost=$(cfgOpt "buildHost")
 target=$(cfgOpt "imageName")
 pxeHost=$(cfgOpt "pxeHost")
 pxeDir=$(cfgOpt "pxeDir")
+opensslServer=$(cfgOpt "opensslServer")
+opensslPort=$(cfgOpt "opensslPort")
 
 tmpDir=$(mktemp -t -d nixos-rebuild-aarch-community.XXXXXX)
 SSHOPTS="${NIX_SSHOPTS:-} -o ControlMaster=auto -o ControlPath=$tmpDir/ssh-%n -o ControlPersist=60"
@@ -44,6 +46,15 @@ drv=$(nix-instantiate ./configuration.nix --show-trace)
 NIX_SSHOPTS=$SSHOPTS nix-copy-closure --to "$buildHost" "$drv"
 out=$(ssh $SSHOPTS "$buildHost" NIX_REMOTE=daemon nix-store --keep-going -r "$drv" -j 5 --cores 45)
 
+psk=$(head -c 9000 /dev/urandom | md5sum | awk '{print $1}')
+
 ssh "$pxeHost" rm -rf "${pxeDir}/${target}"
 ssh "$pxeHost" mkdir "${pxeDir}/${target}"
-ssh -A "$buildHost" scp "$out/{Image,initrd,netboot.ipxe}" "${pxeHost}:${pxeDir}/${target}/"
+ssh "$pxeHost" -- nix-shell -p openssl --run \
+    "openssl s_server -nocert -naccept 1 \
+         -psk $psk -accept ${opensslPort} \
+       | tar -C ${pxeDir}/${target} -zx"
+ssh $SSHOPTS "$buildhost" -- nix-shell -p openssl --run \
+    "tar -cf $out/{Image,initrd,netboot.ipxe} \
+       | openssl s_client -psk $psk \
+           -connect ${opensslServer}:${opensslPort}"
