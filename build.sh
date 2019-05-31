@@ -60,7 +60,7 @@ ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run ":"
 (ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run \
     "'openssl s_server -nocert -naccept 1 \
          -psk $psk -accept ${opensslPort} \
-       | mbuffer | tar -C ${pxeDir}/${target} -zx'" 2>&1 \
+       | mbuffer | tar -C ${pxeDir}/${target} -vvvzxf -'" 2>&1 \
     | sed -e 's/^/RECV /')&
 recvpid=$?
 
@@ -71,7 +71,7 @@ done
 sleep 1
 
 ssh $SSHOPTS "$buildHost" -- nix-shell -p pv mbuffer openssl --run \
-    "'tar -czf - $out/{Image,initrd,netboot.ipxe} \
+    "'tar -C $out -vvvczf - {Image,initrd,netboot.ipxe} \
        | pv | mbuffer | openssl s_client -psk $psk \
            -connect ${opensslServer}:${opensslPort}'" 2>&1 \
     | sed -e 's/^/SEND /'
