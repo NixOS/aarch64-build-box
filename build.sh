@@ -68,6 +68,7 @@ while ! ssh $SSHOPTS "$pxeHost" -- "ss -lnt | grep '${opensslPort}'"; do
     echo "Not listening"
     sleep 1
 done
+sleep 1
 
 ssh $SSHOPTS "$buildHost" -- nix-shell -p pv mbuffer openssl --run \
     "'tar -czf - $out/{Image,initrd,netboot.ipxe} \
