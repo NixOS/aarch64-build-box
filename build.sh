@@ -74,8 +74,8 @@ sleep 1
 
 ssh $SSHOPTS "$buildHost" -- nix-shell -p pv mbuffer openssl --run \
     "'tar -C $out -hvvvczf - {Image,initrd,netboot.ipxe} \
-       | pv | mbuffer | openssl enc -aes-256-cbc -e -k $psk \
-           | nc -4 ${opensslServer} ${opensslPort}'" 2>&1 \
+       | mbuffer | openssl enc -aes-256-cbc -e -k $psk \
+           | nc -N -4 ${opensslServer} ${opensslPort}'" 2>&1 \
     | sed -e 's/^/SEND /'
 
 ssh $SSHOPTS "$pxeHost" mkdir -p "${pxeDir}/${target}"
