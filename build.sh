@@ -59,12 +59,12 @@ ssh $SSHOPTS "$pxeHost" mv "${pxeDir}/${target}" "${pxeDir}/${target}.old"
 ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run ":"
 
 set -x
+
 (ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run \
-    "'openssl s_server -nocert -naccept 1 -quiet \
+    "'openssl s_server -quiet -nocert -naccept 1 \
          -psk $psk -accept ${opensslPort} \
        | mbuffer > ${pxeDir}/wat'" 2>&1 \
     | sed -e 's/^/RECV /')&
-recvpid=$?
 
 while ! ssh $SSHOPTS "$pxeHost" -- "ss -lnt | grep '${opensslPort}'"; do
     echo "Not listening"
@@ -74,6 +74,6 @@ sleep 1
 
 ssh $SSHOPTS "$buildHost" -- nix-shell -p pv mbuffer openssl --run \
     "'tar -C $out -hvvvczf - {Image,initrd,netboot.ipxe} \
-       | pv | mbuffer | openssl s_client -quiet -psk $psk \
+       | pv | mbuffer | openssl s_client -quiet -psk $psk -no_ign_eof \
            -connect ${opensslServer}:${opensslPort}'" 2>&1 \
     | sed -e 's/^/SEND /'
