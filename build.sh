@@ -53,9 +53,10 @@ out=$(ssh $SSHOPTS "$buildHost" NIX_REMOTE=daemon nix-store --keep-going -r "$dr
 
 psk=$(head -c 9000 /dev/urandom | md5sum | awk '{print $1}')
 
-ssh $SSHOPTS "$pxeHost" rm -rf "${pxeDir}/${target}.old"
-ssh $SSHOPTS "$pxeHost" mkdir -p "${pxeDir}/${target}"
-ssh $SSHOPTS "$pxeHost" mv "${pxeDir}/${target}" "${pxeDir}/${target}.old"
+
+
+ssh $SSHOPTS "$pxeHost" rm -rf "${pxeDir}/${target}.next"
+ssh $SSHOPTS "$pxeHost" mkdir -p "${pxeDir}/${target}.next"
 ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run ":"
 
 set -x
@@ -76,3 +77,7 @@ ssh $SSHOPTS "$buildHost" -- nix-shell -p pv mbuffer openssl --run \
        | pv | mbuffer | openssl enc -aes-256-cbc -e -k $psk \
            | nc -4 ${opensslServer} ${opensslPort}'" 2>&1 \
     | sed -e 's/^/SEND /'
+
+ssh $SSHOPTS "$pxeHost" mkdir -p "${pxeDir}/${target}"
+ssh $SSHOPTS "$pxeHost" mv "${pxeDir}/${target}" "${pxeDir}/${target}.old"
+ssh $SSHOPTS "$pxeHost" mv "${pxeDir}/${target}.next" "${pxeDir}/${target}"
