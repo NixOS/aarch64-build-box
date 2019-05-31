@@ -58,7 +58,7 @@ ssh $SSHOPTS "$pxeHost" mkdir -p "${pxeDir}/${target}"
 ssh $SSHOPTS "$pxeHost" mv "${pxeDir}/${target}" "${pxeDir}/${target}.old"
 ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run ":"
 
-set +x
+set -x
 (ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run \
     "'openssl s_server -nocert -naccept 1 \
          -psk $psk -accept ${opensslPort} \
