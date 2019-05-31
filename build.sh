@@ -48,9 +48,9 @@ out=$(ssh $SSHOPTS "$buildHost" NIX_REMOTE=daemon nix-store --keep-going -r "$dr
 
 psk=$(head -c 9000 /dev/urandom | md5sum | awk '{print $1}')
 
-ssh "$pxeHost" rm -rf "${pxeDir}/${target}.old"
-ssh "$pxeHost" mv "${pxeDir}/${target}" "${pxeDir}/${target}.old"
-ssh "$pxeHost" -- nix-shell -p mbuffer openssl --run \
+ssh $SSHOPTS "$pxeHost" rm -rf "${pxeDir}/${target}.old"
+ssh $SSHOPTS "$pxeHost" mv "${pxeDir}/${target}" "${pxeDir}/${target}.old"
+ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run \
     "openssl s_server -nocert -naccept 1 \
          -psk $psk -accept ${opensslPort} \
        | mbuffer | tar -C ${pxeDir}/${target} -zx"
