@@ -55,7 +55,7 @@ ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run \
     "'openssl s_server -nocert -naccept 1 \
          -psk $psk -accept ${opensslPort} \
        | mbuffer | tar -C ${pxeDir}/${target} -zx'"
-ssh $SSHOPTS "$buildhost" -- nix-shell -p mbuffer openssl --run \
+ssh $SSHOPTS "$buildhost" -- nix-shell -p pv mbuffer openssl --run \
     "'tar -cf $out/{Image,initrd,netboot.ipxe} \
-       | mbuffer | openssl s_client -psk $psk \
+       | pv | mbuffer | openssl s_client -psk $psk \
            -connect ${opensslServer}:${opensslPort}'"
