@@ -26,13 +26,13 @@ packetDevice=$(cfgOpt "packetDevice")
 
 new_url=${pxeUrlPrefix}/${imageName}/${pxeUrlSuffix}
 
-curl --verbose -X PUT \
+curl -X PUT \
      --header 'Content-Type: application/json' \
      --header "X-Auth-Token: ${packetKey}" \
      "https://api.packet.net/devices/${packetDevice}" \
      --data '{"ipxe_script_url": "'"$new_url"'"}'
 
-curl --verbose -X POST \
+curl -X POST \
      --header 'Content-Type: application/json' \
      --header "X-Auth-Token: ${packetKey}" \
      "https://api.packet.net/devices/${packetDevice}/actions" \
