@@ -52,10 +52,10 @@ ssh $SSHOPTS "$pxeHost" rm -rf "${pxeDir}/${target}.old"
 ssh $SSHOPTS "$pxeHost" mkdir -p "${pxeDir}/${target}"
 ssh $SSHOPTS "$pxeHost" mv "${pxeDir}/${target}" "${pxeDir}/${target}.old"
 ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run \
-    "openssl s_server -nocert -naccept 1 \
+    "'openssl s_server -nocert -naccept 1 \
          -psk $psk -accept ${opensslPort} \
-       | mbuffer | tar -C ${pxeDir}/${target} -zx"
+       | mbuffer | tar -C ${pxeDir}/${target} -zx'"
 ssh $SSHOPTS "$buildhost" -- nix-shell -p mbuffer openssl --run \
-    "tar -cf $out/{Image,initrd,netboot.ipxe} \
+    "'tar -cf $out/{Image,initrd,netboot.ipxe} \
        | mbuffer | openssl s_client -psk $psk \
-           -connect ${opensslServer}:${opensslPort}"
+           -connect ${opensslServer}:${opensslPort}'"
