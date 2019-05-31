@@ -32,11 +32,16 @@ opensslPort=$(cfgOpt "opensslPort")
 tmpDir=$(mktemp -t -d nixos-rebuild-aarch-community.XXXXXX)
 SSHOPTS="${NIX_SSHOPTS:-} -o ControlMaster=auto -o ControlPath=$tmpDir/ssh-%n -o ControlPersist=60"
 
+recvpid=0
 cleanup() {
     for ctrl in "$tmpDir"/ssh-*; do
         ssh -o ControlPath="$ctrl" -O exit dummyhost 2>/dev/null || true
     done
     rm -rf "$tmpDir"
+
+    if [ "$recvpid" -gt 0 ]; then
+        kill -9 "$recvpid"
+    fi
 }
 trap cleanup EXIT
 
@@ -54,7 +59,9 @@ ssh $SSHOPTS "$pxeHost" mv "${pxeDir}/${target}" "${pxeDir}/${target}.old"
 ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run \
     "'openssl s_server -nocert -naccept 1 \
          -psk $psk -accept ${opensslPort} \
-       | mbuffer | tar -C ${pxeDir}/${target} -zx'"
+       | mbuffer | tar -C ${pxeDir}/${target} -zx'" &
+recvpid=$?
+
 ssh $SSHOPTS "$buildhost" -- nix-shell -p pv mbuffer openssl --run \
     "'tar -cf $out/{Image,initrd,netboot.ipxe} \
        | pv | mbuffer | openssl s_client -psk $psk \
