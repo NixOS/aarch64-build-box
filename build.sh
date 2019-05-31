@@ -60,7 +60,7 @@ ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run ":"
 (ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run \
     "'openssl s_server -nocert -naccept 1 \
          -psk $psk -accept ${opensslPort} \
-       | mbuffer | tar -C ${pxeDir}/${target} -vvvzxf -'" 2>&1 \
+       | mbuffer > ${pxeDir}/wat'" 2>&1 \
     | sed -e 's/^/RECV /')&
 recvpid=$?
 
