@@ -1,7 +1,7 @@
 #!/usr/bin/env nix-shell
 #!nix-shell -p jq -p bash -p curl -p gawk --pure -i bash
 
-set -eux
+set -eu
 set -o pipefail
 
 cfgOpt() {

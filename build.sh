@@ -59,7 +59,6 @@ ssh $SSHOPTS "$pxeHost" rm -rf "${pxeDir}/${target}.next"
 ssh $SSHOPTS "$pxeHost" mkdir -p "${pxeDir}/${target}.next"
 ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run ":"
 
-set -x
 
 (ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run \
     "'nc -4 -l ${opensslPort} | openssl enc -aes-256-cbc -d -k ${psk}  \
