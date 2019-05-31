@@ -63,7 +63,7 @@ set -x
 
 (ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run \
     "'nc -4 -l ${opensslPort} | openssl enc -aes-256-cbc -d -k ${psk}  \
-       | mbuffer | tar -C ${pxeDir}/${target} -vvvzxf -'" 2>&1 \
+       | mbuffer | tar -C ${pxeDir}/${target}.next -vvvzxf -'" 2>&1 \
     | sed -e 's/^/RECV /')&
 
 while ! ssh $SSHOPTS "$pxeHost" -- "ss -lnt | grep '${opensslPort}'"; do
