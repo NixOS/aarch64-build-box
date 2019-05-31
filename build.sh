@@ -64,7 +64,10 @@ ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run ":"
     | sed -e 's/^/RECV /')&
 recvpid=$?
 
-sleep 1
+while ! ssh $SSHOPTS "$pxeHost" -- "ss -lnt | grep '${opensslPort}'"; do
+    echo "Not listening"
+    sleep 1
+done
 
 ssh $SSHOPTS "$buildHost" -- nix-shell -p pv mbuffer openssl --run \
     "'tar -czf - $out/{Image,initrd,netboot.ipxe} \
