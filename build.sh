@@ -65,7 +65,7 @@ recvpid=$?
 
 sleep 1
 
-ssh $SSHOPTS "$buildhost" -- nix-shell -p pv mbuffer openssl --run \
+ssh $SSHOPTS "$buildHost" -- nix-shell -p pv mbuffer openssl --run \
     "'tar -cf $out/{Image,initrd,netboot.ipxe} \
        | pv | mbuffer | openssl s_client -psk $psk \
            -connect ${opensslServer}:${opensslPort}'"
