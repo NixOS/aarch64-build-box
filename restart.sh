@@ -26,31 +26,16 @@ packetDevice=$(cfgOpt "packetDevice")
 
 new_url=${pxeUrlPrefix}/${imageName}/${pxeUrlSuffix}
 
-current_url=$(
-    curl -X GET \
-         --header 'Accept: application/json' \
-         --header "X-Auth-Token: ${packetKey}" \
-         "https://api.packet.net/devices/${packetDevice}" \
-        | jq -r '.ipxe_script_url'
-           );
+curl --verbose -X PUT \
+     --header 'Content-Type: application/json' \
+     --header "X-Auth-Token: ${packetKey}" \
+     "https://api.packet.net/devices/${packetDevice}" \
+     --data '{"ipxe_script_url": "'"$new_url"'"}'
 
-if [ "${1:-x}" == "--force" ]; then
-    current_url="...";
-fi
+curl --verbose -X POST \
+     --header 'Content-Type: application/json' \
+     --header "X-Auth-Token: ${packetKey}" \
+     "https://api.packet.net/devices/${packetDevice}/actions" \
+     --data '{"type": "reboot"}'
 
-if [ "$new_url" != "$current_url" ]; then
-    curl --verbose -X PUT \
-         --header 'Content-Type: application/json' \
-         --header "X-Auth-Token: ${packetKey}" \
-         "https://api.packet.net/devices/${packetDevice}" \
-         --data '{"ipxe_script_url": "'"$new_url"'"}'
-
-    curl --verbose -X POST \
-         --header 'Content-Type: application/json' \
-         --header "X-Auth-Token: ${packetKey}" \
-         "https://api.packet.net/devices/${packetDevice}/actions" \
-         --data '{"type": "reboot"}'
-
-    echo "Previous Url: $current_url";
-    echo "New Url: $new_url";
-fi
+echo "Rebooting...";
