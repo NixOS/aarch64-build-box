@@ -56,11 +56,14 @@ psk=$(head -c 9000 /dev/urandom | md5sum | awk '{print $1}')
 ssh $SSHOPTS "$pxeHost" rm -rf "${pxeDir}/${target}.old"
 ssh $SSHOPTS "$pxeHost" mkdir -p "${pxeDir}/${target}"
 ssh $SSHOPTS "$pxeHost" mv "${pxeDir}/${target}" "${pxeDir}/${target}.old"
+ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run ":"
 ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run \
     "'openssl s_server -nocert -naccept 1 \
          -psk $psk -accept ${opensslPort} \
        | mbuffer | tar -C ${pxeDir}/${target} -zx'" &
 recvpid=$?
+
+sleep 1
 
 ssh $SSHOPTS "$buildhost" -- nix-shell -p pv mbuffer openssl --run \
     "'tar -cf $out/{Image,initrd,netboot.ipxe} \
