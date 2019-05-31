@@ -78,5 +78,6 @@ ssh $SSHOPTS "$buildHost" -- nix-shell -p pv mbuffer openssl --run \
     | sed -e 's/^/SEND /'
 
 ssh $SSHOPTS "$pxeHost" mkdir -p "${pxeDir}/${target}"
+ssh $SSHOPTS "$pxeHost" rm -rf "${pxeDir}/${target}.old"
 ssh $SSHOPTS "$pxeHost" mv "${pxeDir}/${target}" "${pxeDir}/${target}.old"
 ssh $SSHOPTS "$pxeHost" mv "${pxeDir}/${target}.next" "${pxeDir}/${target}"
