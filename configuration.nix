@@ -65,7 +65,7 @@ in makeNetboot {
           "cma=0M" "biosdevname=0" "net.ifnames=0" "console=ttyAMA0,115200"
           "initrd=initrd"
         ];
-        kernelPackages = pkgs.linuxPackages_4_14;
+        kernelPackages = pkgs.linuxPackages_5_1;
       };
 
       nix.nrBuildUsers = config.nix.maxJobs * 2;
@@ -73,7 +73,7 @@ in makeNetboot {
       nixpkgs.system = "aarch64-linux";
 
       nixpkgs.config.packageOverrides = pkgs: {
-        linux_4_17 = pkgs.linux_4_17.override {
+        linux_5_1 = pkgs.linux_5_1.override {
           extraConfig =
             ''
               ARCH_HISI y
