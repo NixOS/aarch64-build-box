@@ -269,6 +269,17 @@ in makeNetboot {
       in makeNBuilders 32;
     })
 
+    ({ pkgs, ... }: {
+      systemd.services.clone-nixpkgs = {
+        wantedBy = [ "multi-user.target" ];
+        after = [ "network-online.target" ];
+        serviceConfig.Type = "oneshot";
+        script = ''
+          ${pkgs.git}/bin/git clone --bare https://github.com/nixos/nixpkgs /tmp/nixpkgs.git
+        '';
+      };
+    })
+
     ./users.nix
     ./monitoring.nix
     ./motd.nix
