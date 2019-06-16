@@ -1,3 +1,4 @@
+# How to build community builders
 
 Building: Make a `build.cfg` file and run `./build.sh`:
 
@@ -12,9 +13,9 @@ pxeHost         user@web-accessible-server
 pxeDir          /path/to/web/root
 ```
 
-The build will happen on `buildHost` then SCPd directly from buildHost
-to `pxeHost:pxeDir/imageName`. If this directory already exists, it
-will be deleted.
+The build will happen on `buildHost` then copied directly from buildHost
+to `pxeHost:pxeDir/imageName` (via netcat and openssl).
+If the destination directory already exists, it will be overwritten.
 
 Update the PXE url and restart the server with `./restart.sh`. The PXE
 URL will be calculated by `pxeUrlPrefix/imageName/pxeUrlSuffix`.
