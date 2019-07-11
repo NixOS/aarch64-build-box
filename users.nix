@@ -162,6 +162,11 @@ let
       keys = ./keys/samueldr;
     };
 
+    timokau = {
+      trusted = true;
+      keys = ./keys/timokau;
+    };
+
     tomberek = {
       trusted = true;
       keys = ./keys/tomberek;
