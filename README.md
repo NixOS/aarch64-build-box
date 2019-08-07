@@ -120,4 +120,4 @@ If this doesn't work, ping @grahamc and I can help debug.
 
 ---
 
-ps: if you want to build the netbooted image, check out `./DEV_NOTES`
+ps: if you want to build the netbooted image, check out `./DEV_NOTES.md`
