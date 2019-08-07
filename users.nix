@@ -182,6 +182,11 @@ let
       keys = ./keys/willibutz;
     };
 
+    worldofpeace = {
+      trusted = true;
+      keys = ./keys/worldofpeace;
+    };
+
     xeji = {
       trusted = true;
       keys = ./keys/xeji;
