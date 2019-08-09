@@ -95,6 +95,11 @@ let
       keys = ./keys/jtojnar;
     };
 
+    kalbasit = {
+      trusted = true;
+      keys = ./keys/kalbasit;
+    };
+
     kamilchm = {
       trusted = true;
       keys = ./keys/kamilchm;
