@@ -18,6 +18,11 @@ let
       keys = ./keys/adisbladis;
     };
 
+    amine = {
+      trusted = true;
+      keys = ./keys/amine;
+    };
+
     andir = {
       trusted = true;
       keys = ./keys/andir;
