@@ -126,6 +126,11 @@ let
       keys = ./keys/lnl;
     };
 
+    ma27 = {
+      trusted = true;
+      keys = ./keys/ma27;
+    };
+
     makefu = {
       trusted = true;
       keys = ./keys/makefu;
