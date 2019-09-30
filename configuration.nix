@@ -65,22 +65,20 @@ in makeNetboot {
           "cma=0M" "biosdevname=0" "net.ifnames=0" "console=ttyAMA0,115200"
           "initrd=initrd"
         ];
-        kernelPackages = pkgs.linuxPackages_5_1;
+        kernelPackages = pkgs.linuxPackages;
+        kernelPatches = [{
+          name = "custom-options";
+          patch = null;
+          extraConfig = ''
+            ARCH_HISI y
+            HNS_ENET y
+          '';
+        }];
       };
 
       nix.nrBuildUsers = config.nix.maxJobs * 2;
       nix.maxJobs = 64;
       nixpkgs.system = "aarch64-linux";
-
-      nixpkgs.config.packageOverrides = pkgs: {
-        linux_5_1 = pkgs.linux_5_1.override {
-          extraConfig =
-            ''
-              ARCH_HISI y
-              HNS_ENET y
-            '';
-          };
-        };
     })
 
     ({ # Go fast: networking
