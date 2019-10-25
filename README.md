@@ -118,6 +118,12 @@ Finally, `nix-build . -A hello --option system aarch64-linux`.
 
 If this doesn't work, ping @grahamc and I can help debug.
 
+# Faster nixpkgs clone
+
+You may want to clone nixpkgs on the box occasionally. It clones nixpkgs on
+boot, allowing faster clones for users — just pass `--reference
+/tmp/nixpkgs.git` to your `git clone` command.
+
 ---
 
-ps: if you want to build the netbooted image, check out `./DEV_NOTES`
+ps: if you want to build the netbooted image, check out `./DEV_NOTES.md`

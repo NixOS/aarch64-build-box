@@ -18,6 +18,11 @@ let
       keys = ./keys/adisbladis;
     };
 
+    amine = {
+      trusted = true;
+      keys = ./keys/amine;
+    };
+
     andir = {
       trusted = true;
       keys = ./keys/andir;
@@ -95,6 +100,11 @@ let
       keys = ./keys/jtojnar;
     };
 
+    kalbasit = {
+      trusted = true;
+      keys = ./keys/kalbasit;
+    };
+
     kamilchm = {
       trusted = true;
       keys = ./keys/kamilchm;
@@ -114,6 +124,11 @@ let
     lnl = {
       trusted = true;
       keys = ./keys/lnl;
+    };
+
+    ma27 = {
+      trusted = true;
+      keys = ./keys/ma27;
     };
 
     makefu = {
@@ -167,6 +182,11 @@ let
       keys = ./keys/t184256;
     };
 
+    timokau = {
+      trusted = true;
+      keys = ./keys/timokau;
+    };
+
     tomberek = {
       trusted = true;
       keys = ./keys/tomberek;
@@ -185,6 +205,11 @@ let
     willibutz = {
       trusted = true;
       keys = ./keys/willibutz;
+    };
+
+    worldofpeace = {
+      trusted = true;
+      keys = ./keys/worldofpeace;
     };
 
     xeji = {
