@@ -13,6 +13,11 @@ let
     #      keys = ./keys/youruser;
     #    };
 
+    "0x4A6F" = {
+      trusted = true;
+      keys = ./keys/0x4A6F;
+    };
+
     adisbladis = {
       trusted = true;
       keys = ./keys/adisbladis;
