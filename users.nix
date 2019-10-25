@@ -177,6 +177,11 @@ let
       keys = ./keys/samueldr;
     };
 
+    t184256 = {
+      trusted = true;
+      keys = ./keys/t184256;
+    };
+
     timokau = {
       trusted = true;
       keys = ./keys/timokau;
