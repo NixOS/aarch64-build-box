@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -p jq -p bash -p curl -p gawk --pure -i bash
+#!nix-shell -p jq -p bash -p curl -p gawk -p cacert --pure -i bash
 
 set -eu
 set -o pipefail
