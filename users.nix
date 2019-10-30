@@ -68,6 +68,11 @@ let
       keys = ./keys/clever;
     };
 
+    craige = {
+      trusted = true;
+      keys = ./keys/craige;
+    };
+
     dtz = {
       trusted = true;
       keys = ./keys/dtz;
