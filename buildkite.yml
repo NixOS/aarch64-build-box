@@ -1,0 +1,11 @@
+env:
+  NIX_SSHOPTS: "-i /etc/aarch64-ssh-private"
+
+steps:
+  - command: "cp /etc/aarch64-build-cfg ./build.cfg\n./build.sh"
+    concurrency: 1
+    concurrency_group : build-aarch64-linux-pxe
+
+  - wait
+
+  - command: "./restart.sh"
