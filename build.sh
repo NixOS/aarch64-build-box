@@ -63,7 +63,7 @@ ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run ":"
 
 
 (ssh $SSHOPTS "$pxeHost" -- nix-shell -p socat mbuffer openssl --run \
-    "'socat TCP-LISTEN:${opensslPort} | openssl enc -aes-256-cbc -d -k ${psk}  \
+    "'socat TCP-LISTEN:${opensslPort} - | openssl enc -aes-256-cbc -d -k ${psk}  \
        | mbuffer | tar -C ${pxeDir}/${target}.next -vvvzxf -'" 2>&1 \
     | sed -e 's/^/RECV /')&
 
