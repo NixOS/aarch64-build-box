@@ -60,8 +60,8 @@ ssh $SSHOPTS "$pxeHost" mkdir -p "${pxeDir}/${target}.next"
 ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run ":"
 
 
-(ssh $SSHOPTS "$pxeHost" -- nix-shell -p mbuffer openssl --run \
-    "'nc -4 -l ${opensslPort} | openssl enc -aes-256-cbc -d -k ${psk}  \
+(ssh $SSHOPTS "$pxeHost" -- nix-shell -p socat mbuffer openssl --run \
+    "'socat TCP-LISTEN:${opensslPort} | openssl enc -aes-256-cbc -d -k ${psk}  \
        | mbuffer | tar -C ${pxeDir}/${target}.next -vvvzxf -'" 2>&1 \
     | sed -e 's/^/RECV /')&
 
@@ -71,10 +71,10 @@ while ! ssh $SSHOPTS "$pxeHost" -- "ss -lnt | grep '${opensslPort}'"; do
 done
 sleep 1
 
-ssh $SSHOPTS "$buildHost" -- nix-shell -p pv mbuffer openssl --run \
+ssh $SSHOPTS "$buildHost" -- nix-shell -p socat pv mbuffer openssl --run \
     "'tar -C $out -hvvvczf - {Image,initrd,netboot.ipxe} \
        | mbuffer | openssl enc -aes-256-cbc -e -k $psk \
-           | nc -N -4 ${opensslServer} ${opensslPort}'" 2>&1 \
+           | socat - TCP:${opensslServer}:${opensslPort}'" 2>&1 \
     | sed -e 's/^/SEND /'
 
 ssh $SSHOPTS "$pxeHost" mkdir -p "${pxeDir}/${target}"
