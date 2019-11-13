@@ -256,7 +256,7 @@ in makeNetboot {
               (n: { "grahamcofborg-builder-${toString n}" = builder (toString n); })
               toMake;
           in pkgs.lib.foldr (x: y: x // y) {} services;
-      in makeNBuilders 32;
+      in makeNBuilders 16;
     })
 
     ({ pkgs, ... }: {
