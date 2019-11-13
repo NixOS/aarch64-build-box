@@ -66,14 +66,6 @@ in makeNetboot {
           "initrd=initrd"
         ];
         kernelPackages = pkgs.linuxPackages;
-        kernelPatches = [{
-          name = "custom-options";
-          patch = null;
-          extraConfig = ''
-            ARCH_HISI y
-            HNS_ENET y
-          '';
-        }];
       };
 
       nix.nrBuildUsers = config.nix.maxJobs * 2;
