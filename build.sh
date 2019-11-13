@@ -52,29 +52,12 @@ NIX_SSHOPTS=$SSHOPTS nix-copy-closure --to "$buildHost" "$drv"
 out=$(ssh $SSHOPTS "$buildHost" NIX_REMOTE=daemon nix-store --keep-going -r "$drv" -j 5 --cores 45 --add-root ./community-build-box --indirect)
 
 
-
-psk=$(head -c 9000 /dev/urandom | md5sum | awk '{print $1}')
-
-
-
 ssh $SSHOPTS "$pxeHost" rm -rf "${pxeDir}/${target}.next"
 ssh $SSHOPTS "$pxeHost" mkdir -p "${pxeDir}/${target}.next"
 ssh $SSHOPTS "$pxeHost" -- nix-shell -p socat mbuffer openssl --run ":"
 
-
-(ssh $SSHOPTS "$pxeHost" -- nix-shell -p socat mbuffer openssl --run \
-    "'set -x; socat TCP-LISTEN:${opensslPort} - | openssl enc -aes-256-cbc -d -k ${psk} | mbuffer | tar -C ${pxeDir}/${target}.next -vvvzxf -'" 2>&1 \
-    | sed -e 's/^/RECV /')&
-
-while ! ssh $SSHOPTS "$pxeHost" -- "ss -lnt | grep '${opensslPort}'"; do
-    echo "Not listening"
-    sleep 1
-done
-sleep 1
-
-ssh $SSHOPTS "$buildHost" -- nix-shell -p socat pv mbuffer openssl --run \
-    "'set -x; tar -C $out -hvvvczf - {Image,initrd,netboot.ipxe} | mbuffer | openssl enc -aes-256-cbc -e -k $psk | socat - TCP:${opensslServer}:${opensslPort}'" 2>&1 \
-    | sed -e 's/^/SEND /'
+ssh $SSHOPTS "$buildHost" -- tar -C "$out" -hvvvczf - '{Image,initrd,netboot.ipxe}' \
+    | ssh $SSHOPTS "$pxeHost" -- tar -C "${pxeDir}/${target}.next" -vvvzxf -
 
 ssh $SSHOPTS "$pxeHost" mkdir -p "${pxeDir}/${target}"
 ssh $SSHOPTS "$pxeHost" rm -rf "${pxeDir}/${target}.old"
