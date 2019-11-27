@@ -43,6 +43,11 @@ let
       keys = ./keys/bennofs;
     };
 
+    betaboon = {
+      trusted = true;
+      keys = ./keys/betaboon;
+    };
+
     bkchr = {
       trusted = true;
       keys = ./keys/bkchr;
