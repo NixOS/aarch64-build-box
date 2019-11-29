@@ -53,6 +53,11 @@ let
       keys = ./keys/cstrahan;
     };
 
+    danielfullmer = {
+      trusted = true;
+      keys = ./keys/danielfullmer;
+    };
+
     dezgeg = {
       trusted = true;
       keys = ./keys/dezgeg;
