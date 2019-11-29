@@ -105,6 +105,7 @@ in makeNetboot {
 
       networking.interfaces.bond0 = {
         useDHCP = false;
+        macAddress = "14:30:04:ea:87:26";
 
         ipv4 = {
           routes = [
