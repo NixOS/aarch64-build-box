@@ -110,6 +110,11 @@ let
       keys = ./keys/grahamc;
     };
 
+    jbaum98 = {
+      trusted = true;
+      keys = ./keys/jbaum98;
+    };
+
     jtojnar = {
       trusted = true;
       keys = ./keys/jtojnar;
