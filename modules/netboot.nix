@@ -30,44 +30,24 @@ with lib;
           else [ pkgs.grub2 pkgs.syslinux ]);
     system.boot.loader.kernelFile = pkgs.stdenv.platform.kernelTarget;
 
-    fileSystems."/" =
-      { fsType = "tmpfs";
-        options = [ "mode=0755" ];
-      };
+    networking.hostId = "00000000";
+    fileSystems."/" = {
+      fsType = "zfs";
+      device = "rpool/root";
+    };
 
-    # In stage 1, mount a tmpfs on top of /nix/store (the squashfs
-    # image) to make this a live CD.
-    fileSystems."/nix/.ro-store" =
+    fileSystems."/squash-nix-store" =
       { fsType = "squashfs";
-        device = "../nix-store.squashfs";
-        options = [ "loop" ];
-        neededForBoot = true;
-      };
-
-    fileSystems."/nix/.rw-store" =
-      { fsType = "ext4";
-        device = "/dev/disk/by-label/scratch-space";
-        neededForBoot = true;
+      device = "../nix-store.squashfs";
+      options = [ "loop" ];
+      neededForBoot = true;
       };
 
     boot.initrd.postMountCommands = ''
-      mkdir -p /mnt-root/nix/.rw-store/work
-      mkdir -p /mnt-root/nix/.rw-store/store
-      echo "overlay /mnt-root/nix/store overlay lowerdir=/mnt-root/nix/.ro-store,upperdir=/mnt-root/nix/.rw-store/store,workdir=/mnt-root/nix/.rw-store/work," >> /etc/fstab
-      mkdir -p /mnt-root/nix/store
-      mount /mnt-root/nix/store
+      mkdir -p $targetRoot/nix
+      cp -r $targetRoot/squash-nix-store $targetRoot/nix/store
     '';
 
-#     fileSystems."/nix/store" =
-#       { fsType = "overlay";
-#         device = "overlay";
-#         options = [
-#           "lowerdir=/mnt-root/nix/.ro-store"
-#           "upperdir=/mnt-root/nix/.rw-store/store"
-#           "workdir=/mnt-root/nix/.rw-store/work"
-#         ];
-#       };
-#
     boot.initrd.availableKernelModules = [ "squashfs" "overlay" ];
 
     boot.initrd.kernelModules = [ "loop" "overlay" ];

@@ -26,9 +26,17 @@ if ! test -L /dev/disk/by-label/persist; then
     mkfs.ext4 -L persist /dev/sda1
 fi
 
-if ! test -L /dev/disk/by-label/scratch-space; then
-    mkfs.ext4 -L scratch-space /dev/sda2
-fi
+zpool \
+    create -f \
+    -O sync=disabled \
+    -O mountpoint=none \
+    -O atime=off \
+    -O compression=lz4 \
+    -O xattr=sa \
+    -O acltype=posixacl \
+    -O relatime=on \
+    -o ashift=12 \
+    rpool \
+    /dev/sda2
 
-# Always erase the scratch space
-mkfs.ext4 -F -L scratch-space /dev/disk/by-label/scratch-space
+zfs create -o mountpoint=legacy rpool/root

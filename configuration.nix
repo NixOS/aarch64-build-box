@@ -29,7 +29,7 @@ let
       set -eu
       set -o pipefail
 
-      PATH="${pkgs.coreutils}/bin:${pkgs.utillinux}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.e2fsprogs}/bin"
+      PATH="${pkgs.coreutils}/bin:${pkgs.utillinux}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.e2fsprogs}/bin:${pkgs.zfs}/bin"
 
       exec ${./post-devices.sh}
     '';
@@ -149,6 +149,7 @@ in makeNetboot {
       };
       security.sudo.wheelNeedsPassword = false;
 
+      boot.supportedFilesystems = [ "zfs" ];
       boot.initrd.postDeviceCommands = "${postDeviceCommands}";
       boot.initrd.postMountCommands = "${postMountCommands}";
       boot.postBootCommands = ''
