@@ -5,7 +5,8 @@ steps:
   - command: "cp /etc/aarch64-build-cfg ./build.cfg\n./build.sh"
     concurrency: 1
     concurrency_group : build-aarch64-linux-pxe
-
+    agents:
+      aarch64: true
   - wait
 
   - command: "./restart.sh"
