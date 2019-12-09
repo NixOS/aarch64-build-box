@@ -151,6 +151,11 @@ let
       keys = ./keys/lnl;
     };
 
+    lovesegfault = {
+      trusted = true;
+      keys = ./keys/lovesegfault;
+    };
+
     ma27 = {
       trusted = true;
       keys = ./keys/ma27;
