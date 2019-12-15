@@ -115,6 +115,11 @@ let
       keys = ./keys/grahamc;
     };
 
+    grw = {
+      trusted = true;
+      keys = ./keys/grw;
+    };
+
     jbaum98 = {
       trusted = true;
       keys = ./keys/jbaum98;
