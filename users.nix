@@ -98,6 +98,11 @@ let
       keys = ./keys/flokli;
     };
 
+    fpletz = {
+      trusted = true;
+      keys = ./keys/fpletz;
+    };
+
     expipiplus1 = {
       trusted = true;
       keys = ./keys/expipiplus1;
