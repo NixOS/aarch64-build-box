@@ -83,6 +83,11 @@ let
       keys = ./keys/craige;
     };
 
+    colemickens = {
+      trusted = true;
+      keys = ./keys/colemickens;
+    };
+
     dtz = {
       trusted = true;
       keys = ./keys/dtz;
