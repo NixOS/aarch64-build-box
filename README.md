@@ -114,7 +114,7 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMUTz5i9u5H2FHNAmZJyoJfIGyUm/HfGhfwnc142L3ds
 
 ***If it is not, please open an issue!***
 
-Finally, `nix-build . -A hello --option system aarch64-linux`.
+Finally, `nix-build . -A hello --argstr system aarch64-linux`.
 
 If this doesn't work, ping @grahamc and I can help debug.
 
