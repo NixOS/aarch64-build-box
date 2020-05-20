@@ -26,7 +26,7 @@ cfgOpt() {
 #target=$(cfgOpt "imageName")
 
 git clone https://github.com/grahamc/packet-nix-builder
-nix-build ./packet-nix-builder/build-support/aarch64-setup.nix --out-link ./importer
+nix-build -I nixpkgs=channel:nixos-unstable-small ./packet-nix-builder/build-support/aarch64-setup.nix --out-link ./importer
 ./importer
 buildHost=$(cat machines | grep aarch64 | grep big-parallel | cut -d' ' -f1 | head -n1)
 printf "%s %s\n" \
