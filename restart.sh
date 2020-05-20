@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -p jq -p bash -p curl -p gawk -p cacert --pure -i bash
+#!nix-shell -p jq -p bash -p curl -p gawk -p cacert --pure -i bash -I nixpkgs=channel:nixos-unstable-small
 
 set -eu
 set -o pipefail

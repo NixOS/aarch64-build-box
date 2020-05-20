@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -p curl -p jq -i bash
+#!nix-shell -p curl -p jq -i bash -I nixpkgs=channel:nixos-unstable-small
 
 set -o pipefail
 set -eu
