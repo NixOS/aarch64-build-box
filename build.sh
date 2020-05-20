@@ -70,7 +70,7 @@ out=$(ssh $SSHOPTS "$buildHost" NIX_REMOTE=daemon nix-store --keep-going -r "$dr
 
 ssh $SSHOPTS "$pxeHost" rm -rf "${pxeDir}/${target}.next"
 ssh $SSHOPTS "$pxeHost" mkdir -p "${pxeDir}/${target}.next"
-ssh $SSHOPTS "$pxeHost" -- nix-shell -I nixpkgs=channel:nixos-unstable-small -p socat mbuffer openssl --run ":"
+ssh $SSHOPTS "$pxeHost" -- nix-shell -p socat mbuffer openssl --run ":"
 
 ssh $SSHOPTS "$buildHost" -- tar -C "$out" -hvvvczf - '{Image,initrd,netboot.ipxe}' \
     | ssh $SSHOPTS "$pxeHost" -- tar -C "${pxeDir}/${target}.next" -vvvzxf -
