@@ -63,7 +63,7 @@ trap cleanup EXIT
 
 set -eu
 
-drv=$(nix-instantiate ./configuration.nix --show-trace)
+drv=$(nix-instantiate -I nixpkgs=channel:nixos-unstable-small ./configuration.nix --show-trace)
 NIX_SSHOPTS=$SSHOPTS nix-copy-closure --to "$buildHost" "$drv"
 out=$(ssh $SSHOPTS "$buildHost" NIX_REMOTE=daemon nix-store --keep-going -r "$drv" -j 5 --cores 45 --add-root ./community-build-box --indirect)
 
