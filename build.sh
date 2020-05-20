@@ -22,15 +22,31 @@ cfgOpt() {
     echo "$ret"
 }
 
-buildHost=$(cfgOpt "buildHost")
-target=$(cfgOpt "imageName")
-pxeHost=$(cfgOpt "pxeHost")
-pxeDir=$(cfgOpt "pxeDir")
-opensslServer=$(cfgOpt "opensslServer")
-opensslPort=$(cfgOpt "opensslPort")
+#buildHost=$(cfgOpt "buildHost")
+#target=$(cfgOpt "imageName")
+
+git clone https://github.com/grahamc/packet-nix-builder
+nix-build ./packet-nix-builder/build-support/aarch64-setup.nix --out-link ./importer
+./importer
+buildHost=$(cat machines | grep aarch64 | grep big-parallel | cut -d' ' -f1 | head -n1)
+printf "%s %s\n" \
+       "$(echo "$buildHost" | cut -d@ -f2)" \
+       "$(grep "$buildHost" machines | head -n1 | cut -d' ' -f8 | base64 -d)" > KnownHosts
+
+
+#pxeHost=$(cfgOpt "pxeHost")
+#pxeDir=$(cfgOpt "pxeDir")
+#opensslServer=$(cfgOpt "opensslServer")
+#opensslPort=$(cfgOpt "opensslPort")
+target=nix-community-aarch64
+pxeHost=netboot@netboot.gsc.io
+pxeDir=/var/lib/nginx/netboot/webroot/
+opensslServer=netboot.gsc.io
+opensslPort=61616
+
 
 tmpDir=$(mktemp -t -d nixos-rebuild-aarch-community.XXXXXX)
-SSHOPTS="${NIX_SSHOPTS:-} -o ControlMaster=auto -o ControlPath=$tmpDir/ssh-%n -o ControlPersist=60"
+SSHOPTS="${NIX_SSHOPTS:-}  -o UserKnownHostsFile=$(pwd)/KnownHosts -o ControlMaster=auto -o ControlPath=$tmpDir/ssh-%n -o ControlPersist=60"
 
 recvpid=0
 cleanup() {
