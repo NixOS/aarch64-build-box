@@ -1,12 +1,13 @@
 env:
-  NIX_SSHOPTS: "-i /etc/aarch64-ssh-private"
+  NIX_SSHOPTS: "-i ./id_rsa"
 
 steps:
-  - command: "cp /etc/aarch64-build-cfg ./build.cfg\n./build.sh"
+  - command: "./build.sh"
     concurrency: 1
     concurrency_group : build-aarch64-linux-pxe
     agents:
-      aarch64: true
+      nixos-foundation-netboot: true
   - wait
-
   - command: "./restart.sh"
+    agents:
+      nixos-foundation-netboot: true
