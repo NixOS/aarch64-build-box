@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -p jq -p bash -p curl -p gawk -p cacert --pure -i bash -I nixpkgs=channel:nixos-unstable-small
+#!nix-shell -p jq -p bash -p curl -p gawk -p cacert -i bash -I nixpkgs=channel:nixos-unstable-small
 
 set -eu
 set -o pipefail
@@ -18,9 +18,9 @@ cfgOpt() {
 }
 
 packetDevice="bd949fc7-29d5-4d6b-813b-e408f89a6c29"
-#if [ "${PACKET_TOKEN:-x}" == "x" ]; then
-#    PACKET_TOKEN=$(cfgOpt "packetKey")
-#fi
+if [ "${PACKET_TOKEN:-x}" == "x" ]; then
+    PACKET_TOKEN=$(cfgOpt "packetKey")
+fi
 
 curl -X POST \
      --header 'Content-Type: application/json' \
