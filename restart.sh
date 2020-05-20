@@ -17,24 +17,14 @@ cfgOpt() {
     echo "$ret"
 }
 
-pxeUrlPrefix=$(cfgOpt "pxeUrlPrefix")
-pxeUrlSuffix=$(cfgOpt "pxeUrlSuffix")
-imageName=$(cfgOpt "imageName")
-pxeDir=$(cfgOpt "pxeDir")
-packetKey=$(cfgOpt "packetKey")
-packetDevice=$(cfgOpt "packetDevice")
-
-new_url=${pxeUrlPrefix}/${imageName}/${pxeUrlSuffix}
-
-curl -X PUT \
-     --header 'Content-Type: application/json' \
-     --header "X-Auth-Token: ${packetKey}" \
-     "https://api.packet.net/devices/${packetDevice}" \
-     --data '{"ipxe_script_url": "'"$new_url"'"}'
+packetDevice="bd949fc7-29d5-4d6b-813b-e408f89a6c29"
+if [ "${PACKET_TOKEN:-x}" == "x" ]; then
+    PACKET_TOKEN=$(cfgOpt "packetKey")
+fi
 
 curl -X POST \
      --header 'Content-Type: application/json' \
-     --header "X-Auth-Token: ${packetKey}" \
+     --header "X-Auth-Token: ${PACKET_TOKEN}" \
      "https://api.packet.net/devices/${packetDevice}/actions" \
      --data '{"type": "reboot"}'
 
