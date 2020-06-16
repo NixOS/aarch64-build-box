@@ -123,6 +123,11 @@ let
       keys = ./keys/globin;
     };
 
+    ghuntley = {
+      trusted = true;
+      keys = ./keys/ghuntley;
+    };
+
     grahamc = {
       sudo = true;
       trusted = true;
