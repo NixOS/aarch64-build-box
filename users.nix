@@ -78,6 +78,11 @@ let
       keys = ./keys/dhess;
     };
 
+    domenkozar = {
+      trusted = true;
+      keys = ./keys/domenkozar;
+    };
+
     clever = {
       trusted = true;
       keys = ./keys/clever;
