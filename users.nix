@@ -165,6 +165,11 @@ let
       keys = ./keys/kiwi;
     };
 
+    kloenk = {
+      trusted = true;
+      keys = ./keys/kloenk;
+    };
+
     lheckemann = {
       sudo = true;
       trusted = true;
