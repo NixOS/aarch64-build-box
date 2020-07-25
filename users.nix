@@ -103,6 +103,11 @@ let
       keys = ./keys/dtz;
     };
 
+    emiller = {
+      trusted = true;
+      keys = ./keys/emiller;
+    };
+
     etu = {
       trusted = true;
       keys = ./keys/etu;
