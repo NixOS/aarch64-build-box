@@ -226,6 +226,11 @@ let
       keys = ./keys/moretea;
     };
 
+    progval = {
+      trusted = true;
+      keys = ./keys/progval;
+    };
+
     Profpatsch = {
       trusted = true;
       keys = ./keys/Profpatsch;
