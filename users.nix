@@ -236,6 +236,11 @@ let
       keys = ./keys/Profpatsch;
     };
 
+    prusnak = {
+      trusted = true;
+      keys = ./keys/prusnak;
+    };
+
     rnhmjoj = {
       trusted = true;
       keys = ./keys/rnhmjoj;
