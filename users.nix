@@ -18,6 +18,11 @@ let
       keys = ./keys/0x4A6F;
     };
 
+    aaronjanse = {
+      trusted = true;
+      keys = ./keys/aaronjanse;
+    };
+
     adisbladis = {
       trusted = true;
       keys = ./keys/adisbladis;
