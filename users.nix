@@ -236,6 +236,11 @@ let
       keys = ./keys/moretea;
     };
 
+    mvnetbiz = {
+      trusted = true;
+      keys = ./keys/mvnetbiz;
+    };
+
     Profpatsch = {
       trusted = true;
       keys = ./keys/Profpatsch;
