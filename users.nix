@@ -236,6 +236,11 @@ let
       keys = ./keys/moretea;
     };
 
+    nicoo = {
+      trusted = true;
+      keys = ./keys/nicoo;
+    };
+
     Profpatsch = {
       trusted = true;
       keys = ./keys/Profpatsch;
