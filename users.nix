@@ -118,6 +118,11 @@ let
       keys = ./keys/etu;
     };
 
+    fgaz = {
+      trusted = true;
+      keys = ./keys/fgaz;
+    };
+
     flokli = {
       trusted = true;
       keys = ./keys/flokli;
