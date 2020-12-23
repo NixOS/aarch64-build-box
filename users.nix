@@ -63,6 +63,11 @@ let
       keys = ./keys/bkchr;
     };
 
+    blogle = {
+      trusted = true;
+      keys = ./keys/blogle;
+    };
+
     cstrahan = {
       trusted = true;
       keys = ./keys/cstrahan;
