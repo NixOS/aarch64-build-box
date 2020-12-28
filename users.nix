@@ -141,7 +141,7 @@ let
     gaelan = {
       trusted = true;
       keys = ./keys/gaelan;
-    }
+    };
 
     globin = {
       trusted = true;
