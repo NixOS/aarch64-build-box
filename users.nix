@@ -246,6 +246,11 @@ let
       keys = ./keys/nicoo;
     };
 
+    noneucat = {
+      trusted = true;
+      keys = ./keys/noneucat;
+    };
+
     Profpatsch = {
       trusted = true;
       keys = ./keys/Profpatsch;
