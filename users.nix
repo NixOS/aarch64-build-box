@@ -48,6 +48,11 @@ let
       keys = keys/aszlig;
     };
 
+    bbigras = {
+      trusted = true;
+      keys = ./keys/bbigras;
+    };
+
     bennofs = {
       trusted = true;
       keys = ./keys/bennofs;
