@@ -59,13 +59,15 @@ in makeNetboot {
     ({ pkgs, config, ...}: { # Hardware Tuning
       boot = {
         consoleLogLevel = 7;
-        initrd.availableKernelModules = [ "ahci" "pci_thunder_ecam" "hisi-rng" ];
+        initrd.availableKernelModules = [ "ahci" "hisi-rng" ];
 
         kernelParams = [
           "cma=0M" "biosdevname=0" "net.ifnames=0" "console=ttyAMA0,115200"
           "initrd=initrd"
         ];
         kernelPackages = pkgs.linuxPackages;
+        #
+        kernel.sysctl."kernel.hostname" = "${config.networking.hostName}.${config.networking.domain}";
       };
 
       nix.nrBuildUsers = config.nix.maxJobs * 2;
@@ -74,7 +76,8 @@ in makeNetboot {
     })
 
     ({ # Go fast: networking
-      networking.hostName = "aarch64.nixos.community";
+      networking.hostName = "aarch64";
+      networking.domain = "nixos.community";
       networking.dhcpcd.enable = false;
       networking.defaultGateway = {
         address = "147.75.77.189";
