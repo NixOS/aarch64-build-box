@@ -1,3 +1,6 @@
 /nix/ofborg-path
 result
 build.cfg
+deploy.key
+deploy.key-cert.pub
+deploy.key.pub
