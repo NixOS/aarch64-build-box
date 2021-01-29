@@ -5,7 +5,7 @@ let
     let
       config_evaled = import "${pkgs.path}/nixos/lib/eval-config.nix" config;
       build = config_evaled.config.system.build;
-      kernelTarget = config_evaled.pkgs.stdenv.platform.kernelTarget;
+      kernelTarget = config_evaled.pkgs.stdenv.hostPlatform.linux-kernel.target;
     in
       pkgs.symlinkJoin {
         name="netboot";
