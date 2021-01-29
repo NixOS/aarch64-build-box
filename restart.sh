@@ -18,13 +18,13 @@ cfgOpt() {
 }
 
 packetDevice="bd949fc7-29d5-4d6b-813b-e408f89a6c29"
-if [ "${PACKET_TOKEN:-x}" == "x" ]; then
-    PACKET_TOKEN=$(cfgOpt "packetKey")
+if [ "${PACKET_AUTH_TOKEN:-x}" == "x" ]; then
+    PACKET_AUTH_TOKEN=$(cfgOpt "packetKey")
 fi
 
 curl -X POST \
      --header 'Content-Type: application/json' \
-     --header "X-Auth-Token: ${PACKET_TOKEN}" \
+     --header "X-Auth-Token: ${PACKET_AUTH_TOKEN}" \
      "https://api.packet.net/devices/${packetDevice}/actions" \
      --data '{"type": "reboot"}'
 
