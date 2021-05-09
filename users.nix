@@ -256,6 +256,11 @@ let
       keys = ./keys/prusnak;
     };
 
+    qyliss = {
+      trusted = true;
+      keys = ./keys/qyliss;
+    };
+
     rnhmjoj = {
       trusted = true;
       keys = ./keys/rnhmjoj;
