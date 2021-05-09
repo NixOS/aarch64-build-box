@@ -93,6 +93,11 @@ let
       keys = ./keys/domenkozar;
     };
 
+    dotlambda = {
+      trusted = true;
+      keys = ./keys/dotlambda;
+    };
+
     clever = {
       trusted = true;
       keys = ./keys/clever;
