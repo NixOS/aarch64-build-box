@@ -175,8 +175,6 @@ in makeNetboot {
 
         trustedUsers = [ "@wheel" "@trusted" ];
 
-        package = pkgs.nixUnstable;
-
         useSandbox = true;
       };
     })
@@ -223,7 +221,7 @@ in makeNetboot {
           wantedBy = [ "multi-user.target" ];
 
           path = with pkgs; [
-            nixUnstable
+            nix
             git
             curl
             bash
