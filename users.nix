@@ -170,6 +170,11 @@ let
       keys = ./keys/izorkin;
     };
 
+    jamie = {
+      trusted = true;
+      keys = ./keys/jamie;
+    };
+
     jbaum98 = {
       trusted = true;
       keys = ./keys/jbaum98;
