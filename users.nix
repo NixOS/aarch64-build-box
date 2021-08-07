@@ -73,6 +73,11 @@ let
       keys = ./keys/cstrahan;
     };
 
+    dandellion = {
+      trusted = true;
+      keys = ./keys/dandellion;
+    };
+
     danielfullmer = {
       trusted = true;
       keys = ./keys/danielfullmer;
