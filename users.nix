@@ -68,6 +68,12 @@ let
       keys = ./keys/blogle;
     };
 
+    cole-h = {
+      sudo = true;
+      trusted = true;
+      keys = ./keys/cole-h;
+    };
+
     cstrahan = {
       trusted = true;
       keys = ./keys/cstrahan;
