@@ -293,6 +293,11 @@ let
       keys = ./keys/t184256;
     };
 
+    talyz = {
+      trusted = true;
+      keys = ./keys/talyz;
+    };
+
     timokau = {
       trusted = true;
       keys = ./keys/timokau;
