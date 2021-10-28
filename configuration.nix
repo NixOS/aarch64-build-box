@@ -247,6 +247,7 @@ in makeNetboot {
             git config --global user.email "graham+cofborg@grahamc.com"
             git config --global user.name "GrahamCOfBorg"
             export RUST_BACKTRACE=1
+            export RUST_LOG=trace
 
             ${ofborg}/bin/builder /persist/ofborg/config-${id}.json
           '';
