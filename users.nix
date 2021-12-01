@@ -288,6 +288,11 @@ let
       keys = ./keys/samueldr;
     };
 
+    sternenseemann = {
+      trusted = true;
+      keys = ./keys/sternenseemann;
+    };
+
     t184256 = {
       trusted = true;
       keys = ./keys/t184256;
