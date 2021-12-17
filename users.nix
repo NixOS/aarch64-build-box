@@ -267,6 +267,11 @@ let
       keys = ./keys/nicoo;
     };
 
+    ninjin = {
+      trusted = true;
+      keys = ./keys/ninjin;
+    };
+
     Profpatsch = {
       trusted = true;
       keys = ./keys/Profpatsch;
