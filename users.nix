@@ -328,6 +328,11 @@ let
       keys = ./keys/vcunat;
     };
 
+    vikanezrimaya = {
+      trusted = true;
+      keys = ./keys/vikanezrimaya;
+    };
+
     volth = {
       trusted = true;
       keys = ./keys/volth;
