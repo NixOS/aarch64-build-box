@@ -348,6 +348,11 @@ let
       keys = ./keys/willibutz;
     };
 
+    winter = {
+      trusted = true;
+      keys = ./keys/winter;
+    };
+
     worldofpeace = {
       trusted = true;
       keys = ./keys/worldofpeace;
