@@ -232,6 +232,11 @@ let
       keys = ./keys/lovesegfault;
     };
 
+    lostnet = {
+      trusted = true;
+      keys = ./keys/lostnet;
+    };
+
     ma27 = {
       trusted = true;
       keys = ./keys/ma27;
