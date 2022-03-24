@@ -176,6 +176,11 @@ let
       keys = ./keys/grahamc;
     };
 
+    hexa = {
+      trusted = true;
+      keys = ./keys/hexa;
+    };
+
     izorkin = {
       trusted = true;
       keys = ./keys/izorkin;
