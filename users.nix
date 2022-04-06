@@ -154,6 +154,11 @@ let
       keys = ./keys/fpletz;
     };
 
+    emilytrau = {
+      trusted = true;
+      keys = ./keys/emilytrau;
+    };
+
     expipiplus1 = {
       trusted = true;
       keys = ./keys/expipiplus1;
