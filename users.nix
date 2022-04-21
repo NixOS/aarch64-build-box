@@ -242,6 +242,11 @@ let
       keys = ./keys/lovesegfault;
     };
 
+    lukegb = {
+      trusted = true;
+      keys = ./keys/lukegb;
+    };
+
     ma27 = {
       trusted = true;
       keys = ./keys/ma27;
