@@ -139,6 +139,11 @@ let
       keys = ./keys/etu;
     };
 
+    eyjhb = {
+      trusted = true;
+      keys = ./keys/eyjhb;
+    };
+
     fgaz = {
       trusted = true;
       keys = ./keys/fgaz;
