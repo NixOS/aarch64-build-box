@@ -312,6 +312,11 @@ let
       keys = ./keys/qyliss;
     };
 
+    r-burns = {
+      trusted = true;
+      keys = ./keys/r-burns;
+    };
+
     rnhmjoj = {
       trusted = true;
       keys = ./keys/rnhmjoj;
