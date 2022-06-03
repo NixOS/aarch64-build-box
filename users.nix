@@ -297,6 +297,11 @@ let
       keys = ./keys/noneucat;
     };
 
+    pogobanane = {
+      trusted = true;
+      keys = ./keys/pogobanane;
+    };
+
     Profpatsch = {
       trusted = true;
       keys = ./keys/Profpatsch;
