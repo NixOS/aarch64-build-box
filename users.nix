@@ -28,6 +28,11 @@ let
       keys = ./keys/adisbladis;
     };
 
+    ajs124 = {
+      trusted = true;
+      keys = ./keys/ajs124;
+    };
+
     amine = {
       trusted = true;
       keys = ./keys/amine;
