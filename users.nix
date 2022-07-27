@@ -378,6 +378,11 @@ let
       keys = ./keys/volth;
     };
 
+    weebsorceress = {
+      trusted = true;
+      keys = ./keys/weebsorceress;
+    };
+
     willibutz = {
       trusted = true;
       keys = ./keys/willibutz;
