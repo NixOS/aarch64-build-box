@@ -104,6 +104,11 @@ let
       keys = ./keys/dezgeg;
     };
 
+    dguibert = {
+      trusted = true;
+      keys = ./keys/dguibert;
+    };
+
     dhess = {
       trusted = true;
       keys = ./keys/dhess;
