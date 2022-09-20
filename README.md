@@ -1,5 +1,3 @@
-
-
 # Want access?
 
 1. You must read literally this entire README. It is critically
