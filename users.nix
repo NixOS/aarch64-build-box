@@ -257,6 +257,11 @@ let
       keys = ./keys/lukegb;
     };
 
+    m00wl = {
+      trusted = true;
+      keys = ./keys/m00wl;
+    };
+
     ma27 = {
       trusted = true;
       keys = ./keys/ma27;
