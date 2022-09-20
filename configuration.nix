@@ -80,11 +80,11 @@ in makeNetboot {
       networking.domain = "nixos.community";
       networking.dhcpcd.enable = false;
       networking.defaultGateway = {
-        address = "147.75.77.189";
+        address = "147.28.143.249";
         interface = "bond0";
       };
       networking.defaultGateway6 = {
-        address = "2604:1380:0:d600::6";
+        address = "2604:1380:4641:c900::e";
         interface = "bond0";
       };
       networking.nameservers = [
@@ -115,16 +115,16 @@ in makeNetboot {
             {
               address = "10.0.0.0";
               prefixLength = 8;
-              via = "10.99.98.134";
+              via = "10.70.108.142";
             }
           ];
           addresses = [
             {
-              address = "147.75.77.190";
+              address = "147.28.143.250";
               prefixLength = 30;
             }
             {
-              address = "10.99.98.135";
+              address = "10.70.108.143";
               prefixLength = 31;
             }
           ];
@@ -133,7 +133,7 @@ in makeNetboot {
         ipv6 = {
           addresses = [
             {
-              address = "2604:1380:0:d600::7";
+              address = "2604:1380:4641:c900::f";
               prefixLength = 127;
             }
           ];
