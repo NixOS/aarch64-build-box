@@ -17,7 +17,7 @@ cfgOpt() {
     echo "$ret"
 }
 
-packetDevice="bd949fc7-29d5-4d6b-813b-e408f89a6c29"
+packetDevice="956d80d8-21ba-476d-9b5c-d076b7f51329"
 if [ "${PACKET_AUTH_TOKEN:-x}" == "x" ]; then
     PACKET_AUTH_TOKEN=$(cfgOpt "packetKey")
 fi

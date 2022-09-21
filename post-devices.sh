@@ -3,8 +3,8 @@
 set -eux
 set -o pipefail
 
-if ! test -b /dev/sda1; then
-    sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/sda
+if ! test -b /dev/nvme0n1p1; then
+    sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/nvme0n1
       o # clear the in memory partition table
       n # new partition
       p # primary partition
@@ -23,7 +23,7 @@ EOF
 fi
 
 if ! test -L /dev/disk/by-label/persist; then
-    mkfs.ext4 -L persist /dev/sda1
+    mkfs.ext4 -L persist /dev/nvme0n1p1
 fi
 
 zpool \
@@ -37,6 +37,6 @@ zpool \
     -O relatime=on \
     -o ashift=12 \
     rpool \
-    /dev/sda2
+    /dev/nvme0n1p2
 
 zfs create -o mountpoint=legacy rpool/root
