@@ -372,6 +372,11 @@ let
       trusted = true;
       keys = ./keys/tomberek;
     };
+  
+    truelecter = {
+      trusted = true;
+      keys = ./keys/truelecter;
+    };
 
     vcunat = {
       trusted = true;
