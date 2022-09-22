@@ -287,6 +287,11 @@ let
       keys = ./keys/mic92;
     };
 
+    misuzu = {
+      trusted = true;
+      keys = ./keys/misuzu;
+    };
+
     mog = {
       trusted = true;
       keys = ./keys/mog;
