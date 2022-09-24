@@ -417,6 +417,11 @@ let
       trusted = true;
       keys = ./keys/yegortimoshenko;
     };
+
+    zowoq = {
+      trusted = true;
+      keys = ./keys/zowoq;
+    };
   };
 
   ifAttr = key: default: result: opts:
