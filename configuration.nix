@@ -29,7 +29,7 @@ let
       set -eu
       set -o pipefail
 
-      PATH="${pkgs.coreutils}/bin:${pkgs.utillinux}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.e2fsprogs}/bin:${pkgs.zfs}/bin"
+      PATH="${pkgs.coreutils}/bin:${pkgs.util-linux}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.e2fsprogs}/bin:${pkgs.zfs}/bin"
 
       exec ${./post-devices.sh}
     '';
@@ -41,7 +41,7 @@ let
       set -eu
       set -o pipefail
 
-      PATH="${pkgs.coreutils}/bin:${pkgs.utillinux}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.e2fsprogs}/bin"
+      PATH="${pkgs.coreutils}/bin:${pkgs.util-linux}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.e2fsprogs}/bin"
 
       exec ${./persistence.sh}
     '';
