@@ -7,7 +7,8 @@ set -o pipefail
 if [ "${1:-x}" = "x" ]; then
     ./nix/update-nixpkgs.sh
     ./nix/update-ofborg-path.sh
-    git clone https://github.com/grahamc/packet-nix-builder
+    git clone https://github.com/NixOS/equinix-metal-builders
+    git -C equinix-metal-builders reset --hard 2e23403a85b121f8fb58b60ff399a8b0d19d84ce
 fi
 
 cfgOpt() {
@@ -27,7 +28,7 @@ cfgOpt() {
 #target=$(cfgOpt "imageName")
 
 
-nix-build -I nixpkgs=channel:nixos-unstable-small ./packet-nix-builder/build-support/aarch64-setup.nix --out-link ./importer
+nix-build -I nixpkgs=channel:nixos-unstable-small ./equinix-metal-builders/build-support/aarch64-setup.nix --out-link ./importer
 ./importer
 buildHost=$(cat machines | grep aarch64 | grep big-parallel | cut -d' ' -f1 | head -n1)
 printf "%s %s\n" \
