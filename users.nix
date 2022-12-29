@@ -365,6 +365,11 @@ let
       keys = ./keys/samueldr;
     };
 
+    solene = {
+      trusted = true;
+      keys = ./keys/solene;
+    };
+
     sternenseemann = {
       trusted = true;
       keys = ./keys/sternenseemann;
