@@ -164,6 +164,11 @@ let
       keys = ./keys/fgaz;
     };
 
+    figsoda = {
+      trusted = true;
+      keys = ./keys/figsoda;
+    };
+
     flokli = {
       trusted = true;
       keys = ./keys/flokli;
