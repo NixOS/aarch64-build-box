@@ -114,6 +114,11 @@ let
       keys = ./keys/dhess;
     };
 
+    dmerkert = {
+      trusted = true;
+      keys = ./keys/dmerkert;
+    };
+
     domenkozar = {
       trusted = true;
       keys = ./keys/domenkozar;
