@@ -24,6 +24,7 @@ let
     };
 
     adisbladis = {
+      sudo = true; # nix-community admin
       trusted = true;
       keys = ./keys/adisbladis;
     };
@@ -293,6 +294,7 @@ let
     };
 
     mic92 = {
+      sudo = true; # nix-community admin
       trusted = true;
       keys = ./keys/mic92;
     };
@@ -441,6 +443,7 @@ let
     };
 
     zowoq = {
+      sudo = true; # nix-community admin
       trusted = true;
       keys = ./keys/zowoq;
     };
