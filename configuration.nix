@@ -173,6 +173,7 @@ in makeNetboot {
 
         settings = {
           cores = 0;
+          experimental-features = [ "flakes" "nix-command" ];
           sandbox = true;
           trusted-users = [ "@wheel" "@trusted" ];
         };
