@@ -70,8 +70,8 @@ in makeNetboot {
         kernel.sysctl."kernel.hostname" = "${config.networking.hostName}.${config.networking.domain}";
       };
 
-      nix.nrBuildUsers = config.nix.maxJobs * 2;
-      nix.maxJobs = 64;
+      nix.nrBuildUsers = config.nix.settings.max-jobs * 2;
+      nix.settings.max-jobs = 64;
       nixpkgs.system = "aarch64-linux";
     })
 
@@ -166,16 +166,17 @@ in makeNetboot {
       };
 
       nix = {
-        buildCores = 0;
-
         gc = {
           automatic = true;
           options = "--max-freed $((64 * 1024**3))";
         };
 
-        trustedUsers = [ "@wheel" "@trusted" ];
-
-        useSandbox = true;
+        settings = {
+          cores = 0;
+          experimental-features = [ "flakes" "nix-command" ];
+          sandbox = true;
+          trusted-users = [ "@wheel" "@trusted" ];
+        };
       };
     })
 
