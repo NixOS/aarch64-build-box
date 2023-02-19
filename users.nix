@@ -100,6 +100,11 @@ let
       keys = ./keys/danielfullmer;
     };
 
+    davidak = {
+      trusted = true;
+      keys = ./keys/davidak;
+    };
+
     dezgeg = {
       trusted = true;
       keys = ./keys/dezgeg;
