@@ -144,8 +144,8 @@ in makeNetboot {
     ({pkgs, ...}: { # Config specific to this purpose
       services.openssh = {
         enable = true;
-        challengeResponseAuthentication = false;
-        passwordAuthentication = false;
+        settings.KbdInteractiveAuthentication = false;
+        settings.PasswordAuthentication = false;
         extraConfig = ''
           MaxSessions 65
         '';
