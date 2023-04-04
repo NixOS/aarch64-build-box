@@ -272,8 +272,11 @@ in makeNetboot {
         wantedBy = [ "multi-user.target" ];
         after = [ "network-online.target" ];
         serviceConfig.Type = "oneshot";
+        startAt = "daily";
         script = ''
-          ${pkgs.git}/bin/git clone --bare https://github.com/nixos/nixpkgs /tmp/nixpkgs.git
+          if [ ! -d /tmp/nixpkgs.git ]; then
+            ${pkgs.git}/bin/git clone --bare https://github.com/nixos/nixpkgs /tmp/nixpkgs.git
+          fi
         '';
       };
     })
