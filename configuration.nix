@@ -144,8 +144,8 @@ in makeNetboot {
     ({pkgs, ...}: { # Config specific to this purpose
       services.openssh = {
         enable = true;
-        challengeResponseAuthentication = false;
-        passwordAuthentication = false;
+        settings.KbdInteractiveAuthentication = false;
+        settings.PasswordAuthentication = false;
         extraConfig = ''
           MaxSessions 65
         '';
@@ -160,6 +160,10 @@ in makeNetboot {
         rm /etc/ssh/ssh_host_*
         cp -r /persist/ssh/ssh_host_* /etc/ssh/
       '';
+
+      environment.systemPackages = [
+        pkgs.git
+      ];
 
       systemd.services.nix-daemon = {
         environment.LD_PRELOAD = "${pkgs.libeatmydata}/lib/libeatmydata.so";
@@ -268,8 +272,11 @@ in makeNetboot {
         wantedBy = [ "multi-user.target" ];
         after = [ "network-online.target" ];
         serviceConfig.Type = "oneshot";
+        startAt = "daily";
         script = ''
-          ${pkgs.git}/bin/git clone --bare https://github.com/nixos/nixpkgs /tmp/nixpkgs.git
+          if [ ! -d /tmp/nixpkgs.git ]; then
+            ${pkgs.git}/bin/git clone --bare https://github.com/nixos/nixpkgs /tmp/nixpkgs.git
+          fi
         '';
       };
     })
