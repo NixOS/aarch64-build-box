@@ -263,6 +263,11 @@ let
       keys = ./keys/lheckemann;
     };
 
+    lily = {
+      trusted = true;
+      keys = ./keys/lily;
+    };
+
     lnl = {
       trusted = true;
       keys = ./keys/lnl;
