@@ -303,6 +303,12 @@ let
       keys = ./keys/matthewbauer;
     };
 
+    matthewcroughan = {
+      name = "matthew";
+      trusted = true;
+      keys = ./keys/matthewcroughan;
+    };
+
     mic92 = {
       sudo = true; # nix-community admin
       trusted = true;
