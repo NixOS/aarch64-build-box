@@ -152,6 +152,12 @@ in makeNetboot {
       };
       security.sudo.wheelNeedsPassword = false;
 
+      services.nix-serve = {
+        enable = true;
+        packages = pkgs.haskellPackages.nix-serve-ng;
+        openFirewall = true;
+      };
+
       boot.supportedFilesystems = [ "zfs" ];
       boot.initrd.postDeviceCommands = "${postDeviceCommands}";
       boot.initrd.postMountCommands = "${postMountCommands}";
