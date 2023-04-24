@@ -377,6 +377,11 @@ let
       keys = ./keys/r-burns;
     };
 
+    raitobezarius = {
+      trusted = true;
+      keys = ./keys/raitobezarius;
+    };
+
     rnhmjoj = {
       trusted = true;
       keys = ./keys/rnhmjoj;
