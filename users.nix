@@ -165,6 +165,11 @@ let
       keys = ./keys/eyjhb;
     };
 
+    fab = {
+      trusted = true;
+      keys = ./keys/fab;
+    };
+
     fgaz = {
       trusted = true;
       keys = ./keys/fgaz;
