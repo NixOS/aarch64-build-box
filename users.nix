@@ -273,6 +273,11 @@ let
       keys = ./keys/lily;
     };
 
+    lilyball = {
+      trusted = true;
+      keys = ./keys/lilyball;
+    };
+
     lnl = {
       trusted = true;
       keys = ./keys/lnl;
