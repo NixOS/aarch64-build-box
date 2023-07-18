@@ -345,13 +345,6 @@ let
       keys = ./keys/nicoo;
     };
 
-    # remote builds from build01.nix-community.org
-    # https://github.com/nix-community/infra
-    nixcommunity = {
-      trusted = true;
-      keys = ./keys/nixcommunity;
-    };
-
     noneucat = {
       trusted = true;
       keys = ./keys/noneucat;
