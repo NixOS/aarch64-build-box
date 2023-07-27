@@ -54,11 +54,6 @@ let
       keys = ./keys/artturin;
     };
 
-    aszlig = {
-      trusted = true;
-      keys = keys/aszlig;
-    };
-
     bennofs = {
       trusted = true;
       keys = ./keys/bennofs;
