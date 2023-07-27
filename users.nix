@@ -222,6 +222,11 @@ let
       keys = ./keys/izorkin;
     };
 
+    janik = {
+      trusted = true;
+      keys = ./keys/janik;
+    };
+
     jamie = {
       trusted = true;
       keys = ./keys/jamie;
