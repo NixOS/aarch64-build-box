@@ -93,12 +93,14 @@ First, put this in your `configuration.nix`:
 ```
 
 **Note:** Make sure the SSH key specified above does *not* have a
-password, otherwise `nix-build` will give an error along the lines of:
+passphrase, otherwise `nix-build` will give an error along the lines of:
 
 > unable to open SSH connection to
 > 'ssh://your-user-name@aarch64.nixos.community': cannot connect to
 > 'your-user-name@aarch64.nixos.community'; trying other available
 > machines...
+
+You should also avoid keys generated with u2f-devices (f.e. yubikeys) like a sk-ssh-ed25519 since you have to press the presence button for every single package build on a remote server. 
 
 Then run an initial SSH connection as root to setup the trust
 fingerprint:
