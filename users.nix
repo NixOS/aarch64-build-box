@@ -24,7 +24,6 @@ let
     };
 
     adisbladis = {
-      sudo = true; # nix-community admin
       trusted = true;
       keys = ./keys/adisbladis;
     };
@@ -315,7 +314,6 @@ let
     };
 
     mic92 = {
-      sudo = true; # nix-community admin
       trusted = true;
       keys = ./keys/mic92;
     };
@@ -343,13 +341,6 @@ let
     nicoo = {
       trusted = true;
       keys = ./keys/nicoo;
-    };
-
-    # remote builds from build01.nix-community.org
-    # https://github.com/nix-community/infra
-    nixcommunity = {
-      trusted = true;
-      keys = ./keys/nixcommunity;
     };
 
     noneucat = {
@@ -469,7 +460,6 @@ let
     };
 
     zowoq = {
-      sudo = true; # nix-community admin
       trusted = true;
       keys = ./keys/zowoq;
     };
