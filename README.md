@@ -1,4 +1,4 @@
-
+> This project is no longer maintained. If you need access to builders, have a look at <https://nix-community.org/community-builder/>
 
 # Want access?
 
