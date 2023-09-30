@@ -149,6 +149,11 @@ let
       keys = ./keys/ehmry;
     };
 
+    enzime = {
+      trusted = true;
+      keys = ./keys/enzime;
+    };
+
     etu = {
       trusted = true;
       keys = ./keys/etu;
