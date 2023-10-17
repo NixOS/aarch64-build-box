@@ -59,7 +59,7 @@ with lib;
 
     # Create the squashfs image that contains the Nix store.
     system.build.squashfsStore = import "${pkgs.path}/nixos/lib/make-squashfs.nix" {
-      inherit (pkgs) stdenv squashfsTools closureInfo;
+      inherit (pkgs) lib stdenv squashfsTools closureInfo;
       storeContents = config.netboot.storeContents;
     };
 
