@@ -193,7 +193,7 @@ let
       trusted = true;
       keys = ./keys/expipiplus1;
     };
-    
+
     gaelan = {
       trusted = true;
       keys = ./keys/gaelan;
@@ -207,6 +207,11 @@ let
     ghuntley = {
       trusted = true;
       keys = ./keys/ghuntley;
+    };
+
+    glepage = {
+      trusted = true;
+      keys = ./keys/glepage;
     };
 
     grahamc = {
