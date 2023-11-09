@@ -92,6 +92,8 @@ in makeNetboot {
         "147.75.207.208"
       ];
 
+      networking.firewall.logRefusedConnections = false;
+
       networking.bonds.bond0 = {
         driverOptions = {
           mode = "802.3ad";
