@@ -261,6 +261,11 @@ let
       keys = ./keys/kamilchm;
     };
 
+    kerstin = {
+      trusted = true;
+      keys = ./keys/kerstin;
+    };
+
     kiwi = {
       trusted = true;
       keys = ./keys/kiwi;
