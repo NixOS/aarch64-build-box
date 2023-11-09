@@ -37,7 +37,6 @@ zpool \
     -O relatime=on \
     -o ashift=12 \
     rpool \
-    /dev/nvme0n1p2 \
-    /dev/nvme1n1
+    /dev/nvme0n1p2
 
 zfs create -o mountpoint=legacy rpool/root
