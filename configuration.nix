@@ -287,6 +287,6 @@ in makeNetboot {
     ./users.nix
     ./monitoring.nix
     ./motd.nix
-    ./armv7l.nix
+    # ./armv7l.nix
   ];
 }
