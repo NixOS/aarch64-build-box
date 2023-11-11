@@ -32,8 +32,9 @@ with lib;
 
     networking.hostId = "00000000";
     fileSystems."/" = {
-      fsType = "zfs";
-      device = "rpool/root";
+      fsType = "btrfs";
+      label = "root";
+      options = ["compress=lzo" "noatime" "discard=async"];
     };
 
     fileSystems."/squash-nix-store" =
