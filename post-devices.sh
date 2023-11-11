@@ -26,18 +26,9 @@ if ! test -L /dev/disk/by-label/persist; then
     mkfs.ext4 -L persist /dev/nvme0n1p1
 fi
 
-zpool \
-    create -f \
-    -O sync=disabled \
-    -O mountpoint=none \
-    -O atime=off \
-    -O compression=lz4 \
-    -O xattr=sa \
-    -O acltype=posixacl \
-    -O relatime=on \
-    -o ashift=12 \
-    rpool \
-    /dev/nvme0n1p2 \
-    /dev/nvme1n1
 
-zfs create -o mountpoint=legacy rpool/root
+mkfs.btrfs \
+    --data raid0 \
+    --label root \
+    --force \
+    /dev/nvme0n1p2 /dev/nvme1n1

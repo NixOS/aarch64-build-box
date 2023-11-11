@@ -29,7 +29,7 @@ let
       set -eu
       set -o pipefail
 
-      PATH="${pkgs.coreutils}/bin:${pkgs.util-linux}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.e2fsprogs}/bin:${pkgs.zfs}/bin"
+      PATH="${pkgs.coreutils}/bin:${pkgs.util-linux}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.e2fsprogs}/bin:${pkgs.btrfs-progs}/bin"
 
       exec ${./post-devices.sh}
     '';
