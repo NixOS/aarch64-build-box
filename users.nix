@@ -23,6 +23,11 @@ let
       keys = ./keys/aaronjanse;
     };
 
+    abbe = {
+      trusted = true;
+      keys = ./keys/abbe;
+    };
+
     adisbladis = {
       trusted = true;
       keys = ./keys/adisbladis;
