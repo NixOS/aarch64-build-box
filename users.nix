@@ -221,6 +221,11 @@ let
       keys = ./keys/grahamc;
     };
 
+    hacker1024 = {
+      trusted = true;
+      keys = ./keys/hacker1024;
+    };
+
     hexa = {
       trusted = true;
       keys = ./keys/hexa;
