@@ -398,6 +398,11 @@ let
       keys = ./keys/rnhmjoj;
     };
 
+    ryangibb = {
+      trusted = true;
+      keys = ./keys/ryangibb;
+    };
+
     samueldr = {
       sudo = true;
       trusted = true;
