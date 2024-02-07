@@ -85,7 +85,7 @@ First, put this in your `configuration.nix`:
         sshKey = "/root/a-private-key";
         sshUser = "your-user-name";
         system = "aarch64-linux";
-        supportedFeatures = [ "big-parallel" ];
+        supportedFeatures = [ "big-parallel" "kvm" "nixos-test" ];
       }
     ];
   };
