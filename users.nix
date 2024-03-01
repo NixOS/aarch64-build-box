@@ -368,6 +368,11 @@ let
       keys = ./keys/noneucat;
     };
 
+    pennae = {
+      trusted = true;
+      keys = ./keys/pennae;
+    };
+
     pogobanane = {
       trusted = true;
       keys = ./keys/pogobanane;
