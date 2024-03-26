@@ -53,6 +53,11 @@ let
       keys = ./keys/angerman;
     };
 
+    anthonyroussel = {
+      trusted = true;
+      keys = ./keys/anthonyroussel;
+    };
+
     artturin = {
       trusted = true;
       keys = ./keys/artturin;
