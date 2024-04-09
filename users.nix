@@ -444,6 +444,11 @@ let
       keys = ./keys/talyz;
     };
 
+    thecomputerguy = {
+      trusted = true;
+      keys = ./keys/thecomputerguy;
+    };
+
     timokau = {
       trusted = true;
       keys = ./keys/timokau;
