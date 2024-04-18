@@ -243,7 +243,7 @@
       };
     })
 
-    {
+    ({ config, ... }: {
       fileSystems."/" = {
         fsType = "btrfs";
         label = "root";
@@ -261,7 +261,7 @@
         touch /etc/NIXOS
         ${config.nix.package}/bin/nix-env -p /nix/var/nix/profiles/system --set /run/current-system
       '';
-    }
+    })
 
     ./users.nix
     ./monitoring.nix
