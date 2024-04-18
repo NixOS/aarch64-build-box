@@ -111,16 +111,6 @@
 
         exec ${./post-devices.sh}
       ''}";
-      boot.initrd.postMountCommands = "${pkgs.writeScript "post-mount-commands" ''
-        #!/bin/sh
-
-        set -eu
-        set -o pipefail
-
-        PATH="${pkgs.coreutils}/bin:${pkgs.util-linux}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.e2fsprogs}/bin"
-
-        exec ${./persistence.sh}
-        ''}";
       boot.postBootCommands = ''
         ls -la /
         rm /etc/ssh/ssh_host_*
@@ -258,6 +248,11 @@
         fsType = "tmpfs";
         device = "tmpfs";
         options = ["mode=0755"];
+      };
+      fileSystems."/persist" = {
+        fsType = "ext4";
+        label = "persist";
+        neededForBoot = true;
       };
       boot.loader.grub.enable = false;
     }
