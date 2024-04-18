@@ -1,21 +1,17 @@
-# How to build community builders
-
-Building: Make a `build.cfg` file and run `./build.sh`:
+# How to build community build box
 
 ```
-pxeUrlPrefix    https://yourdomain.com/pxe-images
-pxeUrlSuffix    netboot.ipxe
-packetKey       your-packet-api-key
-packetDevice    your-packet-device-id
-buildHost       user@an-aarch64-capable-build-box
-imageName       nixos-packet-aarch64-2018-01-03v1
-pxeHost         user@web-accessible-server
-pxeDir          /path/to/web/root
+nix build .#hydraJobs.system
 ```
 
-The build will happen on `buildHost` then copied directly from buildHost
-to `pxeHost:pxeDir/imageName` (via netcat and openssl).
-If the destination directory already exists, it will be overwritten.
+You will need to be on an aarch64-linux machine or have an
+aarch64-linux builder configured.
 
-Update the PXE url and restart the server with `./restart.sh`. The PXE
-URL will be calculated by `pxeUrlPrefix/imageName/pxeUrlSuffix`.
+You can use
+[nix-netboot-serve](https://github.com/DeterminateSystems/nix-netboot-serve/)
+to provide netboot for the resulting configuration.
+
+(TODO: this isn't implemented yet)
+The production machine boots via the [build on hydra.nixos.org](TODO)
+using netboot.nixos.org, which is also running nix-netboot-serve.
+
