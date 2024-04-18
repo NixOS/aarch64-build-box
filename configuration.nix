@@ -1,58 +1,7 @@
-{ pkgs ? import ./nix { system = "aarch64-linux"; }
-}:
-let
-  makeNetboot = config:
-    let
-      config_evaled = import "${pkgs.path}/nixos/lib/eval-config.nix" config;
-      build = config_evaled.config.system.build;
-      kernelTarget = config_evaled.pkgs.stdenv.hostPlatform.linux-kernel.target;
-    in
-      pkgs.symlinkJoin {
-        name="netboot";
-        paths=[
-          build.netbootRamdisk
-          build.kernel
-          build.netbootIpxeScript
-        ];
-        postBuild = ''
-          mkdir -p $out/nix-support
-          echo "file ${kernelTarget} $out/${kernelTarget}" >> $out/nix-support/hydra-build-products
-          echo "file initrd $out/initrd" >> $out/nix-support/hydra-build-products
-          echo "file ipxe $out/netboot.ipxe" >> $out/nix-support/hydra-build-products
-        '';
-      };
-
-  postDeviceCommands = pkgs.writeScript "post-device-commands"
-    ''
-      #!/bin/sh
-
-      set -eu
-      set -o pipefail
-
-      PATH="${pkgs.coreutils}/bin:${pkgs.util-linux}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.e2fsprogs}/bin:${pkgs.btrfs-progs}/bin"
-
-      exec ${./post-devices.sh}
-    '';
-
-  postMountCommands = pkgs.writeScript "post-mount-commands"
-    ''
-      #!/bin/sh
-
-      set -eu
-      set -o pipefail
-
-      PATH="${pkgs.coreutils}/bin:${pkgs.util-linux}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.e2fsprogs}/bin"
-
-      exec ${./persistence.sh}
-    '';
-
-  ofborg = builtins.storePath ./nix/ofborg-path;
-
-in makeNetboot {
-  system = "aarch64-linux";
-  modules = [
-    "${pkgs.path}/nixos/modules/profiles/all-hardware.nix"
-    "${pkgs.path}/nixos/modules/profiles/minimal.nix"
+{ pkgs, modulesPath, lib, ... }: {
+  imports = [
+    (modulesPath + "/profiles/all-hardware.nix")
+    (modulesPath + "/profiles/minimal.nix")
 
     ./modules/netboot.nix
 
@@ -155,8 +104,26 @@ in makeNetboot {
       security.sudo.wheelNeedsPassword = false;
 
       boot.supportedFilesystems = [ "zfs" ];
-      boot.initrd.postDeviceCommands = "${postDeviceCommands}";
-      boot.initrd.postMountCommands = "${postMountCommands}";
+      boot.initrd.postDeviceCommands = "${pkgs.writeScript "post-device-commands" ''
+        #!/bin/sh
+
+        set -eu
+        set -o pipefail
+
+        PATH="${pkgs.coreutils}/bin:${pkgs.util-linux}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.e2fsprogs}/bin:${pkgs.btrfs-progs}/bin"
+
+        exec ${./post-devices.sh}
+      ''}";
+      boot.initrd.postMountCommands = "${pkgs.writeScript "post-mount-commands" ''
+        #!/bin/sh
+
+        set -eu
+        set -o pipefail
+
+        PATH="${pkgs.coreutils}/bin:${pkgs.util-linux}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.e2fsprogs}/bin"
+
+        exec ${./persistence.sh}
+        ''}";
       boot.postBootCommands = ''
         ls -la /
         rm /etc/ssh/ssh_host_*
@@ -210,7 +177,13 @@ in makeNetboot {
       environment.etc.host-nix-channel.source = pkgs.path;
     })
 
-    ({pkgs, ...}: {
+    {
+      options.ofborg.package = lib.mkOption {
+        description = "Ofborg package";
+        type = lib.types.package;
+      };
+    }
+    ({pkgs, config, ...}: {
       users.users.gc-of-borg = {
         description = "GC Of Borg Workers";
         home = "/var/lib/gc-of-borg";
@@ -255,7 +228,7 @@ in makeNetboot {
             git config --global user.name "GrahamCOfBorg"
             export RUST_BACKTRACE=1
 
-            ${ofborg}/bin/builder /persist/ofborg/config-${id}.json
+            ${config.ofborg.package}/bin/builder /persist/ofborg/config-${id}.json
           '';
         };
 
