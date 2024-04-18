@@ -33,6 +33,8 @@ mkfs.btrfs \
     --force \
     /dev/nvme0n1p2 /dev/nvme1n1
 
+btrfs device ready /dev/nvme0n1p2
+
 mount -o X-mount.mkdir /dev/nvme0n1p2 /mnt
 cp -a /nix /mnt/nix
 umount /mnt
