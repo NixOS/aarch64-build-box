@@ -111,11 +111,11 @@
 
         exec ${./post-devices.sh}
       ''}";
-      boot.postBootCommands = ''
-        ls -la /
-        rm /etc/ssh/ssh_host_*
-        cp -r /persist/ssh/ssh_host_* /etc/ssh/
-      '';
+
+      services.openssh.hostKeys = [
+        { path = "/persist/ssh/ssh_host_ed25519_key"; type = "ed25519"; }
+        { path = "/persist/ssh/ssh_host_rsa_key"; type = "rsa"; }
+      ];
 
       environment.systemPackages = [
         pkgs.git
