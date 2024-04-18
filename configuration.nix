@@ -262,6 +262,7 @@
         };
       in [
         "init=${stage2module.config.system.build.bootStage2}"
+        "boot.shell_on_fail"
       ];
       boot.postBootCommands = ''
         # nixos-rebuild also requires a "system" profile and an
