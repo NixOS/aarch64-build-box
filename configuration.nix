@@ -255,6 +255,12 @@
         neededForBoot = true;
       };
       boot.loader.grub.enable = false;
+      boot.postBootCommands = ''
+        # nixos-rebuild also requires a "system" profile and an
+        # /etc/NIXOS tag.
+        touch /etc/NIXOS
+        ${config.nix.package}/bin/nix-env -p /nix/var/nix/profiles/system --set /run/current-system
+      '';
     }
 
     ./users.nix
