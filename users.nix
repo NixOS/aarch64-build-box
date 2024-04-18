@@ -102,6 +102,12 @@ let
       keys = ./keys/davidak;
     };
 
+    delroth = {
+      sudo = true;
+      trusted = true;
+      keys = ./keys/delroth;
+    };
+
     dezgeg = {
       trusted = true;
       keys = ./keys/dezgeg;
