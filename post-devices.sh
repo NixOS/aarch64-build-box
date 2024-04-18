@@ -26,14 +26,13 @@ if ! test -L /dev/disk/by-label/persist; then
     mkfs.ext4 -L persist /dev/nvme0n1p1
 fi
 
+modprobe btrfs
 
 mkfs.btrfs \
     --data raid0 \
     --label root \
     --force \
     /dev/nvme0n1p2 /dev/nvme1n1
-
-btrfs device ready /dev/nvme0n1p2
 
 mount -o X-mount.mkdir /dev/nvme0n1p2 /mnt
 cp -a /nix /mnt/nix
