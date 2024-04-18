@@ -271,6 +271,9 @@
         /nix/.nix-netboot-serve-db/register
         ${config.nix.package}/bin/nix-env -p /nix/var/nix/profiles/system --set /run/current-system
       '';
+      boot.initrd.preDeviceCommands = ''
+        ln -s ${config.system.modulesTree}/lib /lib
+      '';
     })
 
     ./users.nix
