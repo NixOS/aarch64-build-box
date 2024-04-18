@@ -3,8 +3,6 @@
     (modulesPath + "/profiles/all-hardware.nix")
     (modulesPath + "/profiles/minimal.nix")
 
-    ./modules/netboot.nix
-
     ({ pkgs, config, ...}: { # Hardware Tuning
       boot = {
         consoleLogLevel = 7;
