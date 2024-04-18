@@ -245,9 +245,9 @@
 
     {
       fileSystems."/" = {
-        fsType = "tmpfs";
-        device = "tmpfs";
-        options = ["mode=0755"];
+        fsType = "btrfs";
+        label = "root";
+        options = ["compress=lzo" "noatime" "discard=async"];
       };
       fileSystems."/persist" = {
         fsType = "ext4";
