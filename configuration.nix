@@ -243,7 +243,7 @@
       };
     })
 
-    ({ config, ... }: {
+    ({ config, modulesPath, lib, pkgs, ... }: {
       fileSystems."/" = {
         fsType = "btrfs";
         label = "root";
@@ -255,10 +255,19 @@
         neededForBoot = true;
       };
       boot.loader.grub.enable = false;
+      system.build.bootStage2 = lib.mkForce config.system.build.bootStage1;
+      boot.kernelParams = let
+        stage2module = import (modulesPath + "/system/boot/stage-2.nix") {
+          inherit config lib pkgs;
+        };
+      in [
+        "init=${stage2module.config.system.build.bootStage2}"
+      ];
       boot.postBootCommands = ''
         # nixos-rebuild also requires a "system" profile and an
         # /etc/NIXOS tag.
         touch /etc/NIXOS
+        /nix/.nix-netboot-serve-db/register
         ${config.nix.package}/bin/nix-env -p /nix/var/nix/profiles/system --set /run/current-system
       '';
     })
