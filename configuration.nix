@@ -261,8 +261,10 @@
           inherit config lib pkgs;
         };
       in [
+        "boot.trace"
         "init=${stage2module.config.system.build.bootStage2}"
         "boot.shell_on_fail"
+        "boot.debug1mounts"
       ];
       boot.postBootCommands = ''
         # nixos-rebuild also requires a "system" profile and an
@@ -274,6 +276,7 @@
       boot.initrd.preDeviceCommands = ''
         ln -s ${config.system.modulesTree}/lib /lib
       '';
+      system.build.initialRamdisk = lib.mkForce (pkgs.writeText "initrd" "not really :)))");
     })
 
     ./users.nix
