@@ -101,7 +101,6 @@
       };
       security.sudo.wheelNeedsPassword = false;
 
-      boot.supportedFilesystems = [ "zfs" ];
       boot.initrd.postDeviceCommands = "${pkgs.writeScript "post-device-commands" ''
         #!/bin/sh
 
@@ -253,6 +252,15 @@
         '';
       };
     })
+
+    {
+      fileSystems."/" = {
+        fsType = "tmpfs";
+        device = "tmpfs";
+        options = ["mode=0755"];
+      };
+      boot.loader.grub.enable = false;
+    }
 
     ./users.nix
     ./monitoring.nix

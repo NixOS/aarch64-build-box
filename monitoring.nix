@@ -9,7 +9,7 @@
         "filefd" "filesystem" "hwmon"
         "loadavg" "mdadm" "meminfo"
         "netdev" "netstat"
-        "sockstat" "systemd" "textfile" "time" "vmstat" "wifi" "zfs"
+        "sockstat" "systemd" "textfile" "time" "vmstat" "wifi"
       ];
       extraFlags = [
         "--collector.textfile.directory=/var/lib/prometheus-node-exporter-text-files"
