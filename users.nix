@@ -1,7 +1,5 @@
+{ lib, ... }:
 let
-  pkgs = import <nixpkgs> {};
-  inherit (pkgs) lib;
-
   users = {
     # 1. Generate an SSH key for your root account and add the public
     #    key to a file matching your name in ./keys/
