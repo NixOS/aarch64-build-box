@@ -260,9 +260,26 @@
         stage2module = import (modulesPath + "/system/boot/stage-2.nix") {
           inherit config lib pkgs;
         };
+        stage2Init = pkgs.runCommand "init.sh" {} ''
+          substitute ${stage2module.config.system.build.bootStage2} $out \
+            --replace-fail 'systemConfig=@systemConfig@' '
+              for o in $(</proc/cmdline); do
+                case $o in
+                  rdinit=*)
+                    set -- $(IFS==; echo $o)
+                    rdinit=$2
+                    ;;
+                  *)
+                    ;;
+                esac
+              done
+              systemConfig=''${rdinit%/init}
+            '
+            chmod +x $out
+        '';
       in [
         "boot.trace"
-        "init=${stage2module.config.system.build.bootStage2}"
+        "init=${stage2Init}"
         "boot.shell_on_fail"
         "boot.debug1mounts"
       ];
