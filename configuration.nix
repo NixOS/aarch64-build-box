@@ -286,7 +286,7 @@
         # nixos-rebuild also requires a "system" profile and an
         # /etc/NIXOS tag.
         touch /etc/NIXOS
-        /nix/.nix-netboot-serve-db/register
+        PATH=/run/current-system/sw/bin /nix/.nix-netboot-serve-db/register
         ${config.nix.package}/bin/nix-env -p /nix/var/nix/profiles/system --set /run/current-system
       '';
       boot.initrd.preDeviceCommands = ''
