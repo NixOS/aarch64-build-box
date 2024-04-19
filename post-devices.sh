@@ -37,3 +37,5 @@ mkfs.btrfs \
 mount -o X-mount.mkdir /dev/nvme0n1p2 /mnt
 cp -a /nix /mnt/nix
 umount /mnt
+
+touch /init
