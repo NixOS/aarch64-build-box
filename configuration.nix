@@ -281,7 +281,6 @@
         "boot.trace"
         "init=${stage2Init}"
         "boot.shell_on_fail"
-        "boot.debug1mounts"
       ];
       boot.postBootCommands = ''
         # nixos-rebuild also requires a "system" profile and an
