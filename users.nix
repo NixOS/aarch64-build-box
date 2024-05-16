@@ -411,6 +411,11 @@ let
       keys = ./keys/raitobezarius;
     };
 
+    rgbcube = {
+      trusted = true;
+      keys = ./keys/rgbcube;
+    };
+
     rnhmjoj = {
       trusted = true;
       keys = ./keys/rnhmjoj;
