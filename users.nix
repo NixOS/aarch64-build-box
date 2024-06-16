@@ -516,7 +516,7 @@ let
     w4tsn = {
       trusted = true;
       keys = ./keys/w4tsn;
-    }
+    };
   };
 
   ifAttr = key: default: result: opts:
