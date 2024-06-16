@@ -103,6 +103,12 @@
       };
       security.sudo.wheelNeedsPassword = false;
 
+      services.nix-serve = {
+        enable = true;
+        packages = pkgs.haskellPackages.nix-serve-ng;
+        openFirewall = true;
+      };
+
       boot.supportedFilesystems = [ "zfs" ];
       boot.initrd.postDeviceCommands = "${pkgs.writeScript "post-device-commands" ''
         #!/bin/sh
