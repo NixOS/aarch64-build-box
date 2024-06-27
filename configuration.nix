@@ -232,6 +232,7 @@
     ({ pkgs, ... }: {
       systemd.services.clone-nixpkgs = {
         wantedBy = [ "multi-user.target" ];
+        wants = [ "network-online.target" ];
         after = [ "network-online.target" ];
         serviceConfig.Type = "oneshot";
         startAt = "daily";
