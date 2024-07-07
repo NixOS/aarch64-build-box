@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "nixos-infra": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1719849596,
+        "narHash": "sha256-Zxl2EltZSCk9K4lGwo0vc3FrH/YmC/Lj6u8xLr/s154=",
+        "owner": "nixos",
+        "repo": "infra",
+        "rev": "9532a8bb92ae9319de11b6c2052b0d68ff3b4dae",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "infra",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1719824438,
@@ -69,6 +85,7 @@
     },
     "root": {
       "inputs": {
+        "nixos-infra": "nixos-infra",
         "nixpkgs": "nixpkgs",
         "ofborg": "ofborg"
       }
