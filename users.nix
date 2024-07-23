@@ -158,6 +158,11 @@ let
       keys = ./keys/ehmry;
     };
 
+    emily = {
+      trusted = true;
+      keys = ./keys/emily;
+    };
+
     enzime = {
       trusted = true;
       keys = ./keys/enzime;
