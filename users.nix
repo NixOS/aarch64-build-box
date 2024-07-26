@@ -223,6 +223,11 @@ let
       keys = ./keys/globin;
     };
 
+    ghostbuster91 = {
+      trusted = true;
+      keys = ./keys/ghostbuster91;
+    };
+
     ghuntley = {
       trusted = true;
       keys = ./keys/ghuntley;
