@@ -36,11 +36,6 @@ let
       keys = ./keys/ajs124;
     };
 
-    amine = {
-      trusted = true;
-      keys = ./keys/amine;
-    };
-
     andir = {
       trusted = true;
       keys = ./keys/andir;
@@ -133,11 +128,6 @@ let
       keys = ./keys/dotlambda;
     };
 
-    clever = {
-      trusted = true;
-      keys = ./keys/clever;
-    };
-
     craige = {
       trusted = true;
       keys = ./keys/craige;
@@ -228,11 +218,6 @@ let
       keys = ./keys/ghuntley;
     };
 
-    glepage = {
-      trusted = true;
-      keys = ./keys/glepage;
-    };
-
     grahamc = {
       sudo = true;
       trusted = true;
@@ -250,24 +235,9 @@ let
       keys = ./keys/izorkin;
     };
 
-    jade = {
-      trusted = true;
-      keys = ./keys/jade;
-    };
-
-    janik = {
-      trusted = true;
-      keys = ./keys/janik;
-    };
-
     jamie = {
       trusted = true;
       keys = ./keys/jamie;
-    };
-
-    jbaum98 = {
-      trusted = true;
-      keys = ./keys/jbaum98;
     };
 
     jtojnar = {
@@ -285,16 +255,6 @@ let
       keys = ./keys/kamilchm;
     };
 
-    kerstin = {
-      trusted = true;
-      keys = ./keys/kerstin;
-    };
-
-    kiwi = {
-      trusted = true;
-      keys = ./keys/kiwi;
-    };
-
     kloenk = {
       trusted = true;
       keys = ./keys/kloenk;
@@ -304,16 +264,6 @@ let
       sudo = true;
       trusted = true;
       keys = ./keys/lheckemann;
-    };
-
-    lily = {
-      trusted = true;
-      keys = ./keys/lily;
-    };
-
-    lnl = {
-      trusted = true;
-      keys = ./keys/lnl;
     };
 
     lovesegfault = {
@@ -362,34 +312,9 @@ let
       keys = ./keys/misuzu;
     };
 
-    mog = {
-      trusted = true;
-      keys = ./keys/mog;
-    };
-
     moredread = {
       trusted = true;
       keys = ./keys/moredread;
-    };
-
-    moretea = {
-      trusted = true;
-      keys = ./keys/moretea;
-    };
-
-    nicoo = {
-      trusted = true;
-      keys = ./keys/nicoo;
-    };
-
-    noneucat = {
-      trusted = true;
-      keys = ./keys/noneucat;
-    };
-
-    pennae = {
-      trusted = true;
-      keys = ./keys/pennae;
     };
 
     pogobanane = {
@@ -405,11 +330,6 @@ let
     prusnak = {
       trusted = true;
       keys = ./keys/prusnak;
-    };
-
-    qyliss = {
-      trusted = true;
-      keys = ./keys/qyliss;
     };
 
     r-burns = {
@@ -433,16 +353,6 @@ let
       keys = ./keys/samueldr;
     };
 
-    solene = {
-      trusted = true;
-      keys = ./keys/solene;
-    };
-
-    someone = {
-      trusted = true;
-      keys = ./keys/someone;
-    };
-
     sternenseemann = {
       trusted = true;
       keys = ./keys/sternenseemann;
@@ -456,11 +366,6 @@ let
     talyz = {
       trusted = true;
       keys = ./keys/talyz;
-    };
-
-    thecomputerguy = {
-      trusted = true;
-      keys = ./keys/thecomputerguy;
     };
 
     timokau = {
@@ -478,16 +383,6 @@ let
       keys = ./keys/vcunat;
     };
 
-    vikanezrimaya = {
-      trusted = true;
-      keys = ./keys/vikanezrimaya;
-    };
-
-    volth = {
-      trusted = true;
-      keys = ./keys/volth;
-    };
-
     willibutz = {
       trusted = true;
       keys = ./keys/willibutz;
@@ -501,11 +396,6 @@ let
     xeji = {
       trusted = true;
       keys = ./keys/xeji;
-    };
-
-    yegortimoshenko = {
-      trusted = true;
-      keys = ./keys/yegortimoshenko;
     };
 
     zowoq = {
