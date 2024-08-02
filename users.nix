@@ -203,6 +203,11 @@ let
       keys = ./keys/fpletz;
     };
 
+    fsagbuya = {
+      trusted = true;
+      keys = ./keys/fsagbuya;
+    };
+
     emilytrau = {
       trusted = true;
       keys = ./keys/emilytrau;
