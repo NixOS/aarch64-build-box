@@ -198,6 +198,12 @@ let
       keys = ./keys/flokli;
     };
 
+    fmzakari = {
+      # github: @fzakaria
+      trusted = true;
+      keys = ./keys/fmzakari;
+    };
+
     fpletz = {
       trusted = true;
       keys = ./keys/fpletz;
