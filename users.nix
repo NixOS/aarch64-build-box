@@ -439,6 +439,11 @@ let
       keys = ./keys/samueldr;
     };
 
+    sebtm = {
+      trusted = true;
+      keys = ./keys/sebtm;
+    };
+
     solene = {
       trusted = true;
       keys = ./keys/solene;
