@@ -118,7 +118,9 @@
       ];
 
       environment.systemPackages = [
+        pkgs.btop
         pkgs.git
+        pkgs.htop
       ];
 
       systemd.services.nix-daemon = {
