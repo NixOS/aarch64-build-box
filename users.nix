@@ -296,6 +296,11 @@ let
       keys = ./keys/kerstin;
     };
 
+    khaneliman = {
+      trusted = true;
+      keys = ./keys/khaneliman;
+    };
+
     kiwi = {
       trusted = true;
       keys = ./keys/kiwi;
