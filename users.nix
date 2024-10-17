@@ -393,6 +393,11 @@ let
       keys = ./keys/noneucat;
     };
 
+    pbsds = {
+      trusted = true;
+      keys = ./keys/pbsds;
+    };
+
     pennae = {
       trusted = true;
       keys = ./keys/pennae;
