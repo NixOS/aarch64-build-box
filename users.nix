@@ -489,6 +489,11 @@ let
       keys = ./keys/tomberek;
     };
 
+    tomodachi94 = {
+      trusted = true;
+      keys = ./keys/tomodachi94;
+    };
+
     vcunat = {
       trusted = true;
       keys = ./keys/vcunat;
