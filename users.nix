@@ -276,6 +276,11 @@ let
       keys = ./keys/jbaum98;
     };
 
+    johnrtitor = {
+      trusted = true;
+      keys = ./keys/johnrtitor;
+    };
+
     jtojnar = {
       trusted = true;
       keys = ./keys/jtojnar;
