@@ -12,7 +12,7 @@
           "cma=0M" "biosdevname=0" "net.ifnames=0" "console=ttyAMA0,115200"
           "initrd=initrd"
         ];
-        kernelPackages = pkgs.linuxPackages_5_15;
+        kernelPackages = pkgs.linuxPackages_latest;
         #
         kernel.sysctl."kernel.hostname" = "${config.networking.hostName}.${config.networking.domain}";
       };
