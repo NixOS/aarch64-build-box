@@ -408,6 +408,11 @@ let
       keys = ./keys/pennae;
     };
 
+    perchun = {
+      trusted = true;
+      keys = ./keys/perchun;
+    };
+
     pogobanane = {
       trusted = true;
       keys = ./keys/pogobanane;
