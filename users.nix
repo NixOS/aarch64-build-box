@@ -66,6 +66,11 @@ let
       keys = ./keys/betaboon;
     };
 
+    binarycat = {
+      trusted = true;
+      keys = ./keys/binarycat;
+    };
+
     bkchr = {
       trusted = true;
       keys = ./keys/bkchr;
