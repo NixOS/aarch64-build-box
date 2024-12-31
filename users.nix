@@ -494,6 +494,11 @@ let
       keys = ./keys/tomberek;
     };
 
+    tomfitzhenry = {
+      trusted = true;
+      keys = ./keys/tomfitzhenry;
+    };
+
     tomodachi94 = {
       trusted = true;
       keys = ./keys/tomodachi94;
