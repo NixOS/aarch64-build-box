@@ -398,6 +398,11 @@ let
       keys = ./keys/noneucat;
     };
 
+    numinit = {
+      trusted = true;
+      keys = ./keys/numinit;
+    };
+
     pbsds = {
       trusted = true;
       keys = ./keys/pbsds;
