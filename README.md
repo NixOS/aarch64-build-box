@@ -1,13 +1,17 @@
+# 🚫 Unavailable as of 2024-12-31 🚫
 
+At 18:30 UTC we shut down all machines that were sponsored by Equinix Metal, since the sponsoring relationship is coming to an end.
 
-# Want access?
+Whether we can provide this service again in the future is up for discussion and possibly funding.
 
-1. You must read literally this entire README. It is critically
-   important that you do so.
-2. Open a PR adding yourself to users.nix
+# <del>Want access?</del>
 
-I'll grant access to well known members of the community, and people
-well known members in the community trust.
+1. <del>You must read literally this entire README. It is critically
+   important that you do so.</del>
+2. <del>Open a PR adding yourself to users.nix</del>
+
+<del>I'll grant access to well known members of the community, and people
+well known members in the community trust.</del>
 
 ## Notes on Security and Safety
 
